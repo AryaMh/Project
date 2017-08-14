@@ -1,0 +1,16 @@
+{
+  "name": "university",
+  "version": "1.0.0",
+  "description": "Centralized Interaction System Between Teaching Assitants and Professors",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+	"express": "*",
+	"mongoose": "*",
+	"body-parser": "*"
+  },
+  "author": "Arya and Saeid",
+  "license": "ISC"
+}
