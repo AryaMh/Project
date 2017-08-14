@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e7e108e-7674-45af-bbf9-61628b8b9773" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -67,6 +66,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -219,12 +219,20 @@
       <updated>1502701099483</updated>
       <workItem from="1502701102703" duration="3220000" />
       <workItem from="1502705716930" duration="23000" />
-      <workItem from="1502735313790" duration="281000" />
+      <workItem from="1502735313790" duration="395000" />
     </task>
+    <task id="LOCAL-00001" summary="pushing">
+      <created>1502735611065</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1502735611065</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3524000" />
+    <option name="totallyTimeSpent" value="3638000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -266,6 +274,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="pushing" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
