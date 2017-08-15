@@ -9,7 +9,19 @@
   "dependencies":{
 	"express": "*",
 	"mongoose": "*",
-	"body-parser": "*"
+	"body-parser": "*",
+    "ejs": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "passport-facebook": "*",
+    "passport-twitter": "*",
+    "passport-google-oauth": "*",
+    "connect-flash": "*",
+    "bcrypt-nodejs": "*",
+    "morgan": "*",
+    "cookie-parser": "*",
+    "method-override": "*",
+    "express-session": "*"
   },
   "author": "Arya and Saeid",
   "license": "ISC"
