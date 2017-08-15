@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e7e108e-7674-45af-bbf9-61628b8b9773" name="Default" comment="">
+    <list default="true" id="0e7e108e-7674-45af-bbf9-61628b8b9773" name="Default" comment="create our routes in app folder&#10;create our views in views folder&#10;update package.json&#10;update app.js">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -292,7 +292,7 @@
       <workItem from="1502705716930" duration="23000" />
       <workItem from="1502735313790" duration="440000" />
       <workItem from="1502814897828" duration="67000" />
-      <workItem from="1502817847214" duration="3597000" />
+      <workItem from="1502817847214" duration="3908000" />
     </task>
     <task id="LOCAL-00001" summary="pushing">
       <created>1502735611065</created>
@@ -329,11 +329,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502821258293</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="create our routes in app folder&#10;create our views in views folder&#10;update package.json&#10;update app.js">
+      <created>1502821471429</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1502821471429</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7347000" />
+    <option name="totallyTimeSpent" value="7658000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
