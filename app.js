@@ -9,7 +9,6 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 require('./config/passport')(passport); //pass passport for configuration
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 dbhandler.initial();
 crawler.initial();
@@ -28,6 +27,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(express.static(process.cwd()+"/public"));
 app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
+
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 app.listen(3000);
 console.log("Listening on port *: 3000");
