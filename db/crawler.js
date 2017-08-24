@@ -18,6 +18,10 @@ var Schema = new mongoose.Schema(CourseProfessorStructure);
 var CPModel = mongoose.model("CourseProfessors", Schema);
 
 
+module.exports.getCPModel = function () {
+  return CPModel;
+};
+
 module.exports.initial = function (){
     mongoose.connect("mongodb://"+MongoServerIP+"/"+DBName,{
         useMongoClient: true

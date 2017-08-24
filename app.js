@@ -13,7 +13,6 @@ require('./config/passport')(passport); //pass passport for configuration
 dbhandler.initial();
 crawler.initial();
 crawler.getCPS();
-
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -28,7 +27,8 @@ app.use(express.static(process.cwd()+"/public"));
 app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
 
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/Routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/Routes/ProfessorRoutes')(app, passport);
 
 app.listen(3000);
 console.log("Listening on port *: 3000");
