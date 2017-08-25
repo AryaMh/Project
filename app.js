@@ -27,8 +27,8 @@ app.use(express.static(process.cwd()+"/public"));
 app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
 
-require('./app/Routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require('./app/Routes/ProfessorRoutes')(app, passport);
+require('./app/routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes/ProfessorRoutes')(app, passport);
 
 app.listen(3000);
 console.log("Listening on port *: 3000");
