@@ -12,6 +12,6 @@ module.exports = function (app, passport) {
         requestObject.StudentEmail = studentUser;
 
         tarequest.add(requestObject);
-        res.json({'response': '200 OK'});
+        res.json({'response': '200'});
     });
 };
