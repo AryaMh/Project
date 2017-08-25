@@ -2,11 +2,7 @@
  * Created by ARYA on 8/23/2017.
  */
 var crawlJson = require('./crawl.json');
-
 var mongoose = require('mongoose');
-
-var MongoServerIP = "127.0.0.1";
-var DBName = "University";
 
 var CourseProfessorStructure = {
     ProfessorName: String,
@@ -23,10 +19,6 @@ module.exports.getCPModel = function () {
 };
 
 module.exports.initial = function (){
-    mongoose.connect("mongodb://"+MongoServerIP+"/"+DBName,{
-        useMongoClient: true
-        /* other options */
-    });
     CPModel.remove({}, function (err) {} );
 };
 

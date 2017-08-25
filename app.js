@@ -28,7 +28,8 @@ app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
 
 require('./app/routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-require('./app/routes/ProfessorRoutes')(app, passport);
+require('./app/routes/professorRoutes')(app, passport);
+require('./app/routes/studentRoutes')(app, passport);
 
 app.listen(3000);
 console.log("Listening on port *: 3000");
