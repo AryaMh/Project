@@ -6,8 +6,7 @@ var mongoose = require('mongoose');
 var ProfessorStructure = {
     ProfessorName: String,
     ProfessorEmail: String,
-    Courses: [],
-    TeachingAssistants: []
+    Courses: []
 };
 
 var Schema = new mongoose.Schema(ProfessorStructure);

@@ -5,7 +5,8 @@ var mongoose = require('mongoose');
 
 var TARequestStructure = {
     ProfessorEmail: String,
-    StudentEmail: String
+    StudentEmail: String,
+    CourseNo: String
 };
 
 var Schema = new mongoose.Schema(TARequestStructure);
@@ -16,5 +17,6 @@ module.exports.getTARequestModel = function () {
 };
 
 module.exports.add = function (requestObject) {
-    new TARequestModel({ProfessorEmail: requestObject.ProfessorEmail, StudentEmail: requestObject.StudentEmail}).save();
+    new TARequestModel({ProfessorEmail: requestObject.ProfessorEmail, StudentEmail: requestObject.StudentEmail
+    ,CourseNo: requestObject.CourseNo}).save();
 };

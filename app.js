@@ -11,8 +11,9 @@ var session = require('express-session');
 require('./config/passport')(passport); //pass passport for configuration
 
 dbhandler.initial();
-crawler.initial();
-crawler.getCPS();
+//crawler.initial();
+//crawler.getCPS();
+//crawler.getAllCPs();
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
