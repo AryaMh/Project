@@ -103,7 +103,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/rejectta', function (req, res) {
-        var profEmail = req.body.ProfessorEmail;//req.user.local.email;
+        var profEmail = req.user.local.email;
         var studentEmail = req.body.StudentEmail;
         var courseNo = req.body.CourseNo;
         tarequests.getTARequestModel().findOneAndRemove({StudentEmail: studentEmail, ProfessorEmail: profEmail, CourseNo: courseNo},
