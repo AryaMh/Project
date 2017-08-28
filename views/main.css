@@ -7,19 +7,22 @@
 
 .events{
     border: 1px solid black;
+    border-radius: 5px;
     background-color: #c3c3c3;
     color: white;
 }
 
 .menuItemTitle{
     border: 1px solid black;
+    border-radius: 5px;
     background-color: #c3c3c3;
     color: white;
 }
 
 .mainPageObjects{
     border: 1px solid black;
-    padding: 1px;
+    border-radius: 5px;
+    padding: 10px;
     margin-right: 10px;
     margin-left: 10px;
     height: auto;
@@ -32,11 +35,21 @@
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    border-radius: 5px;
     text-align: center;
-    padding: 1px;
+    padding: 10px;
     margin-top: 10px;
     margin-right: 10px;
     height: auto;
     background-color: #9ebbc3;
     color: black;
+}
+
+@font-face {
+    font-family: "samim";
+    src: url("../styles/fonts/Samim.ttf");
+}
+
+body{
+font-family: samim;
 }
