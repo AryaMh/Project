@@ -27,8 +27,6 @@ module.exports.getCPS = function() {
     for(var i = 0 ; i < crawlJson.CP.length; i++){
         new CPModel({ProfessorName: crawlJson.CP[i].ProfessorName, ProfessorEmail: crawlJson.CP[i].ProfessorEmail, CourseName: crawlJson.CP[i].CourseName}).save();
     }
-    this.loadProfessorCourses();
-    //console.log(crawlJson[0]);
 };
 
 module.exports.getAllCPs = function () {
