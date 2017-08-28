@@ -72,4 +72,43 @@ module.exports = function (app, passport) {
             res.json(result);
         });
     });
+
+    app.post('/acceptta', function (req, res) {
+        var profEmail = req.user.local.email;
+        var studentEmail = req.body.StudentEmail;
+        var courseNo = req.body.CourseNo;
+        professor.getProfessorModel().findOne({ProfessorEmail: profEmail}, function (error, data) {
+            if(data){
+                var courses = data.Courses;
+                for(var i = 0; i < courses.length; i++){
+                    if(courseNo == courses[i].courseNo){
+                        if(courses[i].tas.indexOf(studentEmail) == -1) {
+                            courses[i].tas.push(studentEmail);
+                            professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: profEmail}, {$set: {Courses: courses}},
+                                function (error, doc) {
+                                console.log(error);
+                                    tarequests.getTARequestModel().findOneAndRemove({StudentEmail: studentEmail, ProfessorEmail: profEmail, CourseNo: courseNo},
+                                        function (error, data) {
+                                        });
+                                    return res.json(courses);
+                                });
+                        }
+                        else{
+                            return res.json({"Message": "You already Requested!"});
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    app.post('/rejectta', function (req, res) {
+        var profEmail = req.body.ProfessorEmail;//req.user.local.email;
+        var studentEmail = req.body.StudentEmail;
+        var courseNo = req.body.CourseNo;
+        tarequests.getTARequestModel().findOneAndRemove({StudentEmail: studentEmail, ProfessorEmail: profEmail, CourseNo: courseNo},
+            function (error, data) {
+                return res.json({"Message": "Request Rejected!"});
+            });
+    });
 };
