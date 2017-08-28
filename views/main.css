@@ -16,3 +16,27 @@
     background-color: #c3c3c3;
     color: white;
 }
+
+.mainPageObjects{
+    border: 1px solid black;
+    padding: 1px;
+    margin-right: 10px;
+    margin-left: 10px;
+    height: auto;
+    display: block;
+    color: black;
+}
+
+.mainPageObjectsTitle{
+    display: inline-block;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+    padding: 1px;
+    margin-top: 10px;
+    margin-right: 10px;
+    height: auto;
+    background-color: #9ebbc3;
+    color: black;
+}
