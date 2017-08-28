@@ -3,60 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="../node_modules/bulma/css/bulma.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="./main.css">
 </head>
-<body dir="rtl" style="min-height: 100vh;">
+<body dir="rtl" style="min-height: 100vh;background-color: #c3c3c3">
     <div class="container is-fluid">
-        <div class="columns">
-            <div class="column" style="border: 1px solid black;">
-                <div style="border: 1px solid black; text-align: center;">
-                    dashboard
+        <div class="columns" style="min-height: 100vh;">
+            <div class="column" style="border: 1px solid black; background-color: #f1f1f1;">
+                <div style="border: 1px solid black; text-align: center; margin-bottom: 10px; background-color: #696b6b; color: white;">
+                    داشبورد
+                </div>
+                <div style="border: 1px solid black; height: 95%;position: relative; background-color: #e0e0e0; color: white;">
+                    <aside class="menu">
+                        <p class="menu-label" style="font-size: medium">
+                            درس های من
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>40-121</a></li>
+                            <li><a>40-122</a></li>
+                        </ul>
+                        <p class="menu-label" style="font-size: medium;border-top: 1px solid black;">
+                            دستیاران من
+                        </p>
+                        <ul class="menu-list">
+                            <li><a class="courseta">40-121 Discrete Mathematics</a>
+                                <ul>
+                                    <li><a>سعید حشمتی saeid@live.com</a></li>
+                                    <li><a>آریا هاشمی hvdh_ts@live.com</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="courseta">40-122 C Programming</a>
+                                <ul>
+                                    <li><a>سعید حشمتی saeid@live.com</a></li>
+                                    <li><a>آریا هاشمی hvdh_ts@live.com</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p class="menu-label" style="font-size: medium;border-top: 1px solid black;">
+                            رخدادها
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>میانترم</a></li>
+                            <li><a>پایان ترم</a></li>
+                            <li><a>تمرین</a></li>
+                            <li><a>امتحانک</a></li>
+                        </ul>
+                        <p class="menu-label" style="border-top: 1px solid black; font-size: medium; border-bottom: 1px solid black">
+                            <a>پیام ها (10)</a>
+                        </p>
+                    </aside>
                 </div>
             </div>
-            <div class="column is-8" style="border: 1px solid black;">
-                <div style="border: 1px solid black; text-align: center; margin-bottom: 10px;">
-                    main box
+            <div class="column is-8" style="border: 1px solid black; background-color: #f1f1f1;">
+                <div style="border: 1px solid black; text-align: center; margin-bottom: 10px; background-color: #696b6b; color: white;">
+                    صفحه اصلی
                 </div>
-                <div style="border: 1px solid black; height: 95%;position: relative;">
+                <div style="border: 1px solid black; height: 95%;position: relative; background-color: #e0e0e0; color: white;">
 
                 </div>
             </div>
-            <div class="column" style="border: 1px solid black;">
-                <aside class="menu">
-                    <p class="menu-label">
-                        General
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Dashboard</a></li>
-                        <li><a>Customers</a></li>
-                    </ul>
-                    <p class="menu-label">
-                        Administration
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Team Settings</a></li>
-                        <li>
-                            <a class="is-active">Manage Your Team</a>
-                            <ul>
-                                <li><a>Members</a></li>
-                                <li><a>Plugins</a></li>
-                                <li><a>Add a member</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Invitations</a></li>
-                        <li><a>Cloud Storage Environment Settings</a></li>
-                        <li><a>Authentication</a></li>
-                    </ul>
-                    <p class="menu-label">
-                        Transactions
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Payments</a></li>
-                        <li><a>Transfers</a></li>
-                        <li><a>Balance</a></li>
-                    </ul>
-                </aside>
+            <div class="column" style="border: 1px solid black; background-color: #f1f1f1;">
+                <div style="border: 1px solid black; text-align: center; margin-bottom: 10px; background-color: #696b6b; color: white;">
+                    داشبورد
+                </div>
+                <div style="border: 1px solid black; height: 95%;position: relative; background-color: #e0e0e0; color: white;">
+                    <aside class="menu">
+                        <p class="menu-label" style="font-size: medium">
+                            تنظیمات
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>صفحه شخصی</a></li>
+                        </ul>
+                        <p style="border-top: 1px solid black"></p>
+                    </aside>
+                </div>
             </div>
         </div>
     </div>
