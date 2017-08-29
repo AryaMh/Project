@@ -6,22 +6,26 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies":{
-	"express": "*",
-	"mongoose": "*",
-	"body-parser": "*",
-    "ejs": "*",
-    "passport": "*",
-    "passport-local": "*",
-    "passport-facebook": "*",
-    "passport-twitter": "*",
-    "passport-google-oauth": "*",
-    "connect-flash": "*",
+  "dependencies": {
+    "async": "^2.5.0",
     "bcrypt-nodejs": "*",
-    "morgan": "*",
+    "body-parser": "*",
+    "connect-flash": "*",
     "cookie-parser": "*",
+    "crypto": "^1.0.1",
+    "ejs": "*",
+    "express": "*",
+    "express-session": "*",
     "method-override": "*",
-    "express-session": "*"
+    "mongoose": "*",
+    "morgan": "*",
+    "nodemailer": "^4.1.0",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "*",
+    "passport-facebook": "*",
+    "passport-google-oauth": "*",
+    "passport-local": "*",
+    "passport-twitter": "*"
   },
   "author": "Arya and Saeid",
   "license": "ISC"

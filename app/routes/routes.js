@@ -1,3 +1,13 @@
+
+var User = require('../models/user');
+var nodemailer = require('nodemailer');
+var smtpTransport1 = require('nodemailer-smtp-transport');
+var async = require('async');
+var crypto = require('crypto');
+var api_key = 'key-92037e9f088b0f8d850d6929ca7936ff';
+var domain = 'sandboxfe21b99a90194e60ab5bc0c166073e31.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -41,6 +51,50 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
+    app.post('/signing', function (req, res, next) {
+        async.waterfall([
+            function(done) {
+                crypto.randomBytes(20, function(err, buf) {
+                    var token = buf.toString('hex');
+                    done(err, token);
+                });
+                console.log("1");
+            },
+            function(token, done) {
+            var newUser = new Object();
+            //newUser.local.push({'email': req.body.email, 'PasswordToken': token, 'PasswordExpires': Date.now() + 3600000});
+            newUser.local = new Object();
+            newUser.local.email = req.body.email;
+            newUser.local.PasswordToken = token;
+            newUser.local.PasswordExpires = Date.now() + 3600000;
+            new User({local: newUser.local}).save(function (err, doc, rows) {
+                console.log(doc);
+                done(err, token, doc);
+                console.log("2");
+            });
+
+            },
+            function(token, user, done) {
+                var data = {
+                    from: 'postmaster@sandboxfe21b99a90194e60ab5bc0c166073e31.mailgun.org',
+                    to: user.local.email,
+                    subject: 'Hello',
+                    text: 'Testing some Mailgun awesomness!'
+                };
+
+                mailgun.messages().send(data, function (error, body) {
+                    console.log(body);
+                    return done(error, 'done');
+                });
+
+            }
+        ], function(err) {
+            if (err)
+                console.log(err);
+            return res.redirect('/forgot');
+        });
+    });
+
     // =====================================
     // PROFILE SECTION =====================
     // =====================================
@@ -59,6 +113,7 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
 };
 
 // route middleware to make sure a user is logged in
