@@ -8,7 +8,6 @@ var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
 require('./config/passport')(passport); //pass passport for configuration
 
 dbhandler.initial();
@@ -25,7 +24,7 @@ app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secre
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-app.use(express.static(process.cwd()+"/public"));
+app.use(express.static(process.cwd()+"/views"));
 app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
 

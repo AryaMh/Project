@@ -12,11 +12,7 @@ module.exports = function (app, passport) {
         result.courses = [];
         professorModel.findOne({'ProfessorEmail' : req.user.local.email}, function(error, data) {
             if(data) {
-                for (var i = 0; i < data.Courses.length; i++)
-                {
-                    result.courses.push(data.Courses[i].courseNo + " - " + data.Courses[i].courseName);
-                }
-                    res.json(result);
+                res.json(data.Courses);
             }
         });
     });
@@ -56,11 +52,8 @@ module.exports = function (app, passport) {
     });
 
     app.get('/tarequests', function (req, res) {
-        var result = new Object();
-        result.tarequests = [];
         tarequests.getTARequestModel().find({ProfessorEmail: req.user.local.email}, function (error, data) {
-            result.tarequests = data;
-            res.json(result);
+            res.json(data);
         });
     });
 

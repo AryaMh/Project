@@ -21,7 +21,6 @@
 
 .mainPageObjects{
     border: 1px solid black;
-    border-radius: 5px;
     padding: 10px;
     margin-right: 10px;
     margin-left: 10px;
@@ -35,21 +34,19 @@
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
-    border-radius: 5px;
     text-align: center;
     padding: 10px;
     margin-top: 10px;
     margin-right: 10px;
     height: auto;
-    background-color: #9ebbc3;
-    color: black;
+    background-color: darkred;
 }
 
 @font-face {
-    font-family: "samim";
-    src: url("../styles/fonts/Samim.ttf");
+    font-family: "shabnam";
+    src: url("/styles/fonts/Shabnam.ttf");
 }
 
 body{
-font-family: samim;
+font-family: shabnam;
 }

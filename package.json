@@ -16,6 +16,7 @@
     "ejs": "*",
     "express": "*",
     "express-session": "*",
+    "mailgun-js": "^0.13.1",
     "method-override": "*",
     "mongoose": "*",
     "morgan": "*",

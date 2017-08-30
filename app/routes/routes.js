@@ -1,14 +1,12 @@
 
 var User = require('../models/user');
-var nodemailer = require('nodemailer');
-var smtpTransport1 = require('nodemailer-smtp-transport');
 var async = require('async');
 var crypto = require('crypto');
 var api_key = 'key-92037e9f088b0f8d850d6929ca7936ff';
 var domain = 'sandboxfe21b99a90194e60ab5bc0c166073e31.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, path) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -101,9 +99,10 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
+        res.sendFile('D://Files//University//Project//views//bulma.html');
+        /*res.render('bulma.html', {
             user : req.user // get the user out of session and pass to template
-        });
+        });*/
     });
 
     // =====================================
