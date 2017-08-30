@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="angular.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main" ng-controller="mainCtrl">
+<div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
+    <div style="font-size: 24px; font-weight: bold;">
+
+        هنروران شریف
+    </div>
+</div>
+<div class="container is-fluid">
+    <div class="columns" style="min-height: 100vh;padding: 100px 0 0 0;">
+        <div class="column" style="background-color: #FFF;">
+            <div style=" height: 95%;position: relative; color: white;">
+                <aside class="menu">
+
+                </aside>
+            </div>
+        </div>
+        <div class="column is-5" style="height: 250px;background-color: #f6f6f6;box-shadow: 0 0 5px rgba(0,0,0,0.7)">
+
+            <div style="height: 95%;position: relative; color: white;">
+
+                <div class="tabs is-boxed">
+                    <ul>
+                        <li class="is-active">
+                            <a href="login.html" dir="ltr" style="color: white; background-color: darkred">
+                                <span>ورود</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="signup.html" dir="ltr">
+                                <span>ثبت نام</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--<div class="field">-->
+                    <!--<p class="control has-icons-right">-->
+                        <!--<input class="input" type="email" placeholder="رایانامه">-->
+                        <!--<span class="icon is-small is-right">-->
+                            <!--<i class="fa fa-envelope"></i>-->
+                        <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+                <div class="field has-addons" dir="ltr">
+                    <p class="control has-icons-left">
+                        <input class="input" type="text" placeholder="رایانامه">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </p>
+                    <p class="control">
+                        <div class="select">
+                            <select>
+                                <option>@ce.sharif.edu</option>
+                                <option>@sharif.edu</option>
+                            </select>
+                        </div>
+                    </p>
+                </div>
+                <div class="field" dir="ltr">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="رمز عبور">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control" style="text-align: center">
+                        <button class="button is-success " style="background-color: darkred;width: 30%">
+                            ورود
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column" style="">
+            <div style="height: 95%;position: relative; color: white;">
+                <aside class="menu">
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
