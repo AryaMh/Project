@@ -10,9 +10,23 @@
                                 <div ng-hide="eventHidden" style="margin-right: 10px;">
                                     <div>
                                         میانترم
-                                        <a style="color: blue">
+                                        <a ng-click="midtermToggle()" style="color: blue">
                                             افزودن
                                         </a>
+                                        <div ng-hide="newMidtermHidden">
+                                            <div class="field" dir="ltr">
+                                                <p class="control">
+                                                    <input ng-model="eventTime1" class="input" name="time" type="text" placeholder="dfa">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control" style="text-align: center">
+                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'midterm', eventTime1)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                       sabt
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.midterm">
                                             <div>
                                                 {{event}}
@@ -21,9 +35,23 @@
                                     </div>
                                     <div>
                                         پایانترم
-                                        <a style="color: blue">
+                                        <a ng-click="finalToggle()" style="color: blue">
                                             افزودن
                                         </a>
+                                        <div ng-hide="newFinalHidden">
+                                            <div class="field" dir="ltr">
+                                                <p class="control">
+                                                    <input ng-model="eventTime2" class="input" name="time" type="text" placeholder="dfa">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control" style="text-align: center">
+                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'final', eventTime2)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                        sabt
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.final">
                                             <div>
                                                 {{event}}
@@ -32,9 +60,23 @@
                                     </div>
                                     <div>
                                         تمرین
-                                        <a style="color: blue">
+                                        <a ng-click="quizToggle()" style="color: blue">
                                             افزودن
                                         </a>
+                                        <div ng-hide="newQuizHidden">
+                                            <div class="field" dir="ltr">
+                                                <p class="control">
+                                                    <input ng-model="eventTime3" class="input" name="time" type="text" placeholder="dfa">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control" style="text-align: center">
+                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'quiz', eventTime3)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                        sabt
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.assignments">
                                             <div>
                                                 {{event}}
@@ -43,9 +85,23 @@
                                     </div>
                                     <div>
                                         امتحانک
-                                        <a style="color: blue">
+                                        <a ng-click="assignmentToggle()" style="color: blue">
                                             افزودن
                                         </a>
+                                        <div ng-hide="newAssignmentHidden">
+                                            <div class="field" dir="ltr">
+                                                <p class="control">
+                                                    <input ng-model="eventTime4" class="input" name="time" type="text" placeholder="dfa">
+                                                </p>
+                                            </div>
+                                            <div class="field">
+                                                <p class="control" style="text-align: center">
+                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'assignments', eventTime4)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                        sabt
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.quiz">
                                             <div>
                                                 {{event}}

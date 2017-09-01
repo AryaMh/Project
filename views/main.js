@@ -87,11 +87,27 @@ app.controller('mainCtrl', function($scope, $http) {
     //CoursePage
     $scope.taHidden = true;
     $scope.eventHidden = true;
+    $scope.newMidtermHidden = true;
+    $scope.newFinalHidden = true;
+    $scope.newQuizHidden = true;
+    $scope.newAssignmentHidden = true;
     $scope.taToggle = function () {
         $scope.taHidden = !$scope.taHidden;
     };
     $scope.eventToggle = function () {
         $scope.eventHidden = !$scope.eventHidden;
+    };
+    $scope.midtermToggle = function () {
+        $scope.newMidtermHidden = !$scope.newMidtermHidden;
+    };
+    $scope.finalToggle = function () {
+        $scope.newFinalHidden = !$scope.newFinalHidden;
+    };
+    $scope.quizToggle = function () {
+        $scope.newQuizHidden = !$scope.newQuizHidden;
+    };
+    $scope.assignmentToggle = function () {
+        $scope.newAssignmentHidden = !$scope.newAssignmentHidden;
     };
 
 
@@ -115,6 +131,66 @@ app.controller('mainCtrl', function($scope, $http) {
                 $scope.assignments = res.data;
             }
         });
+    };
+    
+    $scope.submitNewEvent = function (courseNo, eventType, eventDate) {
+        var object = new Object();
+        object.eventType = eventType;
+        object.CourseNo = courseNo;
+        object.date = eventDate;
+
+        $http({
+            url: '/setevent/',
+            method: "POST",
+            data: JSON.stringify(object)
+        })
+            .then(function (response) {
+                if(eventType == 'midterm'){
+                    if($scope.CourseInfo.events.midterm)
+                        $scope.CourseInfo.events.midterm.push(object.date);
+                    else {
+                        $scope.CourseInfo.events.midterm = [];
+                        $scope.CourseInfo.events.midterm.push(object.date);
+                    }
+                    $scope.newMidtermHidden = true;
+                }
+                else if(eventType == 'final'){
+                    if($scope.CourseInfo.events.final)
+                        $scope.CourseInfo.events.final.push(object.date);
+                    else {
+                        $scope.CourseInfo.events.final = [];
+                        $scope.CourseInfo.events.final.push(object.date);
+                    }
+                    $scope.newMidtermHidden = true;
+                }
+                else if(eventType == 'quiz'){
+                        if($scope.CourseInfo.events.quiz)
+                            $scope.CourseInfo.events.quiz.push(object.date);
+                        else {
+                            $scope.CourseInfo.events.quiz = [];
+                            $scope.CourseInfo.events.quiz.push(object.date);
+                        }
+                        $scope.newMidtermHidden = true;
+                    }
+                else if(eventType == 'assignments'){
+                        if($scope.CourseInfo.events.assignments)
+                            $scope.CourseInfo.events.assignments.push(object.date);
+                        else {
+                            $scope.CourseInfo.events.assignments = [];
+                            $scope.CourseInfo.events.assignments.push(object.date);
+                        }
+                        $scope.newMidtermHidden = true;
+                    }
+                    //document.getElementById('messageBoard').append('<div class="mainPageObjects" style="margin-bottom: 10px;"><div>فرستنده: {{msg.sender}}</div> <div>متن پیام: {{msg.msg}}</div> <div style="position:relative; font-size: small;">تاریخ ارسال:{{msg.time}}</div></div>');
+                    //console.log(response.data);
+                    // $append('');
+                    //angular.element(document.getElementById('_item')).append($compile("<div class="mainPageObjects" style="margin-bottom: 10px;"><div>فرستنده: {{msg.sender}}</div> <div>متن پیام: {{msg.msg}}</div> <div style="position:relative; font-size: small;">تاریخ ارسال:{{msg.time}}</div></div>")($scope));
+                    if (response.data != null) {
+                    }
+                },
+                function (response) { // optional
+                    // failed
+                });
     };
 
     $scope.sendMessage = function (courseNo, msg) {
