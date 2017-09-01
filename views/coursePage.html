@@ -80,7 +80,7 @@
                                 <button ng-click="sendMessage(CourseInfo.courseNo, msg)" class="button" style="color: white;margin-right: 5px;background: darkred;" type="submit" value="ارسال">ارسال</button>
                             </p>
                         </div>
-                        <div ng-repeat="msg in CourseInfo.messages.reverse()" id="messageBoard">
+                        <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
                             <div class="mainPageObjects" style="margin-bottom: 10px;">
                                 <div>فرستنده: {{msg.sender}}</div>
                                 <div>متن پیام: {{msg.msg}}</div>
