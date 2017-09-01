@@ -10,9 +10,17 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.finalHidden = true;
     $scope.quizHidden = true;
     $scope.assignmentsHidden = true;
+    $scope.taAcceptorRejectHidden = true;
+
     var isProfessor = true;
     var allCourses = [];
 
+    $http.get("/userType")
+        .then(function(response) {
+            if(response.data == "professor"){
+                $scope.taAcceptorRejectHidden = false;
+            }
+        });
     $http.get("/courses")
         .then(function(response) {
             $scope.courses = response.data;
@@ -27,6 +35,41 @@ app.controller('mainCtrl', function($scope, $http) {
             console.log(res.data.courseName);
             $scope.CourseInfo = res.data;
         });
+    };
+
+
+    $scope.acceptta = function (taEmail, courseNo) {
+
+
+        var object = new Object();
+        object.StudentEmail = taEmail;
+        object.CourseNo = courseNo;
+        $http({
+            url: '/acceptta/',
+            method: "POST",
+            data: JSON.stringify(object)
+        })
+            .then(function (response) {
+                 var elem = document.getElementById(taEmail);
+                 elem.parentNode.removeChild(elem);
+            });
+    };
+
+    $scope.rejectta = function (taEmail, courseNo) {
+
+
+        var object = new Object();
+        object.StudentEmail = taEmail;
+        object.CourseNo = courseNo;
+        $http({
+            url: '/rejectta/',
+            method: "POST",
+            data: JSON.stringify(object)
+        })
+            .then(function (response) {
+                var elem = document.getElementById(taEmail);
+                elem.parentNode.removeChild(elem);
+            });
     };
 
     $scope.showMainPage = function () {

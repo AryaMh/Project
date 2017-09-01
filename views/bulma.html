@@ -104,7 +104,13 @@
                                             <li>
                                                 {{course.courseNo}}:
                                                 <ul ng-repeat="ta in course.tas">
-                                                    {{ta}}
+                                                    <div id="{{ta}}" ng-model="taAcceptorRejectHidden" style="display: inline-block">
+                                                        {{ta}}
+                                                        <span style="white-space:pre"> --- </span>
+                                                        <a ng-click="acceptta(ta, course.courseNo)" style="color: green">قبول</a>
+                                                        |
+                                                        <a ng-click="rejectta(ta, course.courseNo)" style="color: red">رد</a>
+                                                    </div>
                                                 </ul>
                                             </li>
                                         </ul>
