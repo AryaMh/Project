@@ -69,7 +69,7 @@
                         </div>
                         <div class="mainPageObjects">
                             <div ng-repeat="course in courses">
-                                <a>{{course.courseName}}</a>
+                                <a href="#coursePage" ng-click="courseInfo(course.courseNo)">{{course.courseName}}</a>
                             </div>
                         </div>
                     </div>

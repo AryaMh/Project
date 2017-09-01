@@ -72,13 +72,6 @@
                         بورد درسی
                     </div>
                     <div class="mainPageObjects">
-                        <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
-                            <div class="mainPageObjects" style="margin-bottom: 10px;">
-                                <div>فرستنده: {{msg.sender}}</div>
-                                <div>متن پیام: {{msg.msg}}</div>
-                                <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
-                            </div>
-                        </div>
                         <div class="field has-addons">
                             <p class="control">
                                 <input id="sendmsg" ng-model="msg" class="input" type="text" size="200px">
@@ -86,6 +79,13 @@
                             <p class="control">
                                 <button ng-click="sendMessage(CourseInfo.courseNo, msg)" class="button" style="color: white;margin-right: 5px;background: darkred;" type="submit" value="ارسال">ارسال</button>
                             </p>
+                        </div>
+                        <div ng-repeat="msg in CourseInfo.messages.reverse()" id="messageBoard">
+                            <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                <div>فرستنده: {{msg.sender}}</div>
+                                <div>متن پیام: {{msg.msg}}</div>
+                                <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

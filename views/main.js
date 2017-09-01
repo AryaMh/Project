@@ -87,11 +87,14 @@ app.controller('mainCtrl', function($scope, $http) {
         })
             .then(function (response) {
                 object.sender = response.data.sender;
-                if($scope.CourseInfo.messages)
+                if($scope.CourseInfo.messages) {
                     $scope.CourseInfo.messages.push(object);
+                    $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
+                }
                 else {
                     $scope.CourseInfo.messages = [];
                     $scope.CourseInfo.messages.push(object);
+                    $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
                 }
                 document.getElementById('sendmsg').value = "";
                  //document.getElementById('messageBoard').append('<div class="mainPageObjects" style="margin-bottom: 10px;"><div>فرستنده: {{msg.sender}}</div> <div>متن پیام: {{msg.msg}}</div> <div style="position:relative; font-size: small;">تاریخ ارسال:{{msg.time}}</div></div>');
