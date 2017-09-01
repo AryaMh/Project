@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="bulma.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="angular.min.js"></script>
-    <script src="main.js"></script>
 </head>
 <body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main" ng-controller="mainCtrl">
 <div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
@@ -43,34 +41,17 @@
                         </li>
                     </ul>
                 </div>
-
-                <!--<div class="field">-->
-                <!--<p class="control has-icons-right">-->
-                <!--<input class="input" type="email" placeholder="رایانامه">-->
-                <!--<span class="icon is-small is-right">-->
-                <!--<i class="fa fa-envelope"></i>-->
-                <!--</span>-->
-                <!--</p>-->
-                <!--</div>-->
-                <div class="field has-addons is-centered" dir="ltr">
+                <div class="field is-centered" dir="ltr">
                     <p class="control has-icons-left">
-                        <input class="input" type="text" placeholder="رایانامه" size="200px">
+                        <input name="email" class="input" type="text" placeholder="رایانامه" size="200px">
                         <span class="icon is-small is-left">
                             <i class="fa fa-envelope"></i>
                         </span>
                     </p>
-                    <p class="control">
-                        <div class="select">
-                            <select>
-                                <option>@ce.sharif.edu</option>
-                                <option>@sharif.edu</option>
-                            </select>
-                        </div>
-                    </p>
                 </div>
                 <div class="field">
                     <p class="control" style="text-align: center">
-                        <button class="button is-success " style="background-color: darkred;width: 30%">
+                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
                             ثبت نام
                         </button>
                     </p>

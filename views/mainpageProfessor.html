@@ -1,0 +1,77 @@
+<div>
+    <div class="mainPageObjectsTitle">
+        درسهای من
+    </div>
+    <div class="mainPageObjects">
+        <div ng-repeat="course in courses">
+            <a>{{course.courseName}}</a>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="mainPageObjectsTitle">
+        دستیاران من
+    </div>
+    <div class="mainPageObjects">
+        <div>
+            <ul ng-repeat="course in courses">
+                <li>
+                    {{course.courseName}}:
+                    <ul ng-repeat="ta in course.tas">
+                        <li>
+                            <a>{{ta}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="mainPageObjectsTitle">
+        درخواست دستیاری
+    </div>
+    <div class="mainPageObjects">
+        <div>
+            <ul ng-repeat="req in reqs">
+                <li>
+                    <ul ng-repeat="course in req.Courses">
+                        <li>
+                            {{course.courseNo}}:
+                            <ul ng-repeat="ta in course.tas">
+                                {{ta}}
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="mainPageObjectsTitle">
+        رخدادها
+    </div>
+    <div class="mainPageObjects">
+        <div>
+            <a>
+                میانترم
+            </a>
+        </div>
+        <div>
+            <a>
+                پایانترم
+            </a>
+        </div>
+        <div>
+            <a>
+                تمرین
+            </a>
+        </div>
+        <div>
+            <a>
+                امتحانک
+            </a>
+        </div>
+    </div>
+</div>

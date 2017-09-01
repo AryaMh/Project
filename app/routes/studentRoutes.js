@@ -4,9 +4,9 @@
 var tarequest = require('../models/taRequest.js');
 
 module.exports = function (app, passport) {
-    app.post('/tarequest', function (req, res) {
+    app.post('/tarequest', isLoggedIn, function (req, res) {
         var profEmail = req.body.ProfessorEmail;
-        var studentUser = req.body.StudentEmail;//req.user.local.email;
+        var studentUser = req.user.local.email;//req.body.StudentEmail;
         var courseNo = req.body.CourseNo;
         var requestObject = new Object();
         requestObject.ProfessorEmail = profEmail;
@@ -15,4 +15,13 @@ module.exports = function (app, passport) {
         tarequest.add(requestObject);
         res.json({'response': '200'});
     });
+    function isLoggedIn(req, res, next) {
+
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated())
+            return next();
+
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    }
 };

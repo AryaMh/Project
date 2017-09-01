@@ -5,14 +5,46 @@ var crypto = require('crypto');
 var api_key = 'key-92037e9f088b0f8d850d6929ca7936ff';
 var domain = 'sandboxfe21b99a90194e60ab5bc0c166073e31.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+var profModel = require('../models/professor.js');
 
 module.exports = function(app, passport, path) {
 
+    app.post('/sendMessage',function (req, res) {
+        console.log(req.body);
+        var msg = req.body.msg;
+        var courseNo = req.body.courseNo;
+
+        profModel.getProfessorModel().findOne({ProfessorEmail: req.user.local.email}, function (error, data) {
+            for(var i = 0 ; i < data.Courses.length; i++){
+                if(data.Courses[i].courseNo == courseNo){
+                    if(data.Courses[i].messages != null){
+                        var msgObject = new Object();
+                        msgObject.sender = req.user.local.email;
+                        msgObject.msg = msg;
+                        msgObject.time = req.body.time;
+                        data.Courses[i].messages.push(msgObject);
+                    }
+                    else {
+                        data.Courses[i].messages = [];
+                        var msgObject = new Object();
+                        msgObject.sender = req.user.local.email;
+                        msgObject.msg = msg;
+                        msgObject.time = req.body.time;
+                        data.Courses[i].messages.push(msgObject);
+                    }
+                    profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: req.user.local.email}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                        return res.json(doc);
+                    });
+                }
+            }
+        })
+    });
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
-        res.render('index.ejs'); // load the index.ejs file
+        res.sendfile('D://Files//University//Project//views//login.html');
+        //res.render('index.ejs'); // load the index.ejs file
     });
 
     // =====================================
@@ -22,7 +54,8 @@ module.exports = function(app, passport, path) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.sendfile('D://Files//University//Project//views//login.html');
+        //res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
     // process the login form
@@ -39,7 +72,8 @@ module.exports = function(app, passport, path) {
     app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+        res.sendfile('D://Files//University//Project//views//signup.html');
+        //res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
     // process the signup form

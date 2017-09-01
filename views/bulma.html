@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="bulma.css">
     <link rel="stylesheet" href="main.css">
     <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
     <script src="main.js"></script>
 </head>
-<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main" ng-controller="mainCtrl">
+<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main">
     <div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
         <div style="font-size: 24px; font-weight: bold;">
 
@@ -18,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="container is-fluid">
+    <div class="container is-fluid" ng-controller="mainCtrl">
         <div class="columns" style="min-height: 100vh;padding: 100px 0 0 0;">
             <div class="column" style="background-color: #FFF;">
                 <div style=" height: 95%;position: relative; color: white;">
@@ -28,7 +29,7 @@
                         </div>
                         <ul class="menu-list" style="background-color: #f1f1f1;" ng-repeat="course in courses">
                             <li>
-                                <a>{{course.courseNo}}</a>
+                                <a href="#coursePage" ng-click="courseInfo(course.courseNo)">{{course.courseNo}}</a>
                             </li>
                         </ul>
                         <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
@@ -61,16 +62,16 @@
             </div>
             <div class="column is-8" style="background-color: #f6f6f6;box-shadow: 0 0 5px rgba(0,0,0,0.7)">
 
-                <div style="height: 95%;position: relative; color: white;">
+                <div ng-hide="mainPage">
                     <div>
-                       <div class="mainPageObjectsTitle">
+                        <div class="mainPageObjectsTitle">
                             درسهای من
-                       </div>
-                       <div class="mainPageObjects">
-                           <div ng-repeat="course in courses">
-                               <a>{{course.courseName}}</a>
-                           </div>
-                       </div>
+                        </div>
+                        <div class="mainPageObjects">
+                            <div ng-repeat="course in courses">
+                                <a>{{course.courseName}}</a>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <div class="mainPageObjectsTitle">
@@ -82,9 +83,9 @@
                                     <li>
                                         {{course.courseName}}:
                                         <ul ng-repeat="ta in course.tas">
-                                           <li>
+                                            <li>
                                                 <a>{{ta}}</a>
-                                           </li>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -93,7 +94,7 @@
                     </div>
                     <div>
                         <div class="mainPageObjectsTitle">
-                           درخواست دستیاری
+                            درخواست دستیاری
                         </div>
                         <div class="mainPageObjects">
                             <div>
@@ -118,27 +119,30 @@
                         </div>
                         <div class="mainPageObjects">
                             <div>
-                                <a>
-                                میانترم
+                                <a href="/getevent?eventType=midterm">
+                                    میانترم
                                 </a>
                             </div>
                             <div>
-                                <a>
-                                پایانترم
+                                <a href="/getevent?eventType=final">
+                                    پایانترم
                                 </a>
                             </div>
                             <div>
-                                <a>
-                                تمرین
+                                <a href="/getevent?eventType=assignments">
+                                    تمرین
                                 </a>
                             </div>
                             <div>
-                                <a>
-                                امتحانک
+                                <a href="/getevent?eventType=quiz">
+                                    امتحانک
                                 </a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div ng-hide="!mainPage" ng-view style="height: 95%;position: relative; color: white;">
+
                 </div>
             </div>
             <div class="column" style="">
@@ -148,7 +152,7 @@
                             تنظیمات
                         </div>
                         <ul class="menu-list" style="background-color: #f1f1f1;">
-                            <li><a>صفحه شخصی</a></li>
+                            <li><a ng-click="showMainPage()">صفحه شخصی</a></li>
                         </ul>
                     </aside>
                 </div>

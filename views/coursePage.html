@@ -1,0 +1,60 @@
+
+<div>
+                    <div class="mainPageObjectsTitle">
+                        {{CourseInfo.courseName}}
+                    </div>
+                    <div style="margin-right: 10px; margin-top: 10px;">
+                        <div style="color: black;">
+                            <div>
+                               <a ng-click="eventToggle()"> رخدادها</a>
+                                <div ng-hide="eventHidden" style="margin-right: 10px;">
+                                    <div>
+                                        میانترم
+                                    </div>
+                                    <div>
+                                        پایانترم
+                                    </div>
+                                    <div>
+                                        تمرین
+                                    </div>
+                                    <div>
+                                        امتحانک
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a  ng-click="taToggle()">دستیاران آموزشی</a>
+                                <div ng-hide="taHidden" style="margin-right: 10px;">
+                                    <div ng-repeat="ta in CourseInfo.tas">
+                                        <div>
+                                            {{ta}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="mainPageObjectsTitle">
+                        بورد درسی
+                    </div>
+                    <div class="mainPageObjects">
+                        <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
+                            <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                <div>فرستنده: {{msg.sender}}</div>
+                                <div>متن پیام: {{msg.msg}}</div>
+                                <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
+                            </div>
+                        </div>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input id="sendmsg" ng-model="msg" class="input" type="text" size="200px">
+                            </p>
+                            <p class="control">
+                                <button ng-click="sendMessage(CourseInfo.courseNo, msg)" class="button" style="color: white;margin-right: 5px;background: darkred;" type="submit" value="ارسال">ارسال</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+</div>

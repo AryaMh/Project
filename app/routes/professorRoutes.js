@@ -6,7 +6,7 @@ var professor = require('../models/professor.js');
 var tarequests = require('../models/taRequest.js');
 
 module.exports = function (app, passport) {
-    app.get('/courses', function (req, res) {
+    app.get('/courses', isLoggedIn, function (req, res) {
         var professorModel = professor.getProfessorModel();
         var result = new Object();
         result.courses = [];
@@ -17,7 +17,27 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/tas', function (req, res) {
+    app.get('/courseInfo/:cno', isLoggedIn, function (req, res) {
+        var professorModel = professor.getProfessorModel();
+        var result = new Object();
+        result.courses = [];
+        professorModel.findOne({'ProfessorEmail' : req.user.local.email}, function(error, data) {
+            if(data) {
+                for(var i = 0 ; i < data.Courses.length; i++){
+                    if(data.Courses[i].courseNo == req.params.cno){
+                        res.json(data.Courses[i]);
+                    }
+                }
+            }
+        });
+    });
+
+
+    app.get('/coursePage', isLoggedIn, function (req, res) {
+       res.sendfile("D://Files//University//Project//views//coursePage.html");
+    });
+
+    app.get('/tas', isLoggedIn, function (req, res) {
         var professorModel = professor.getProfessorModel();
         var result = new Object();
         result.tas = [];
@@ -33,7 +53,7 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/tas/:cnumber', function (req, res) {
+    app.get('/tas/:cnumber', isLoggedIn, function (req, res) {
         var professorModel = professor.getProfessorModel();
         var result = new Object();
         result.tas = [];
@@ -51,13 +71,13 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/tarequests', function (req, res) {
+    app.get('/tarequests', isLoggedIn, function (req, res) {
         tarequests.getTARequestModel().find({ProfessorEmail: req.user.local.email}, function (error, data) {
             res.json(data);
         });
     });
 
-    app.get('/tarequests/:cnumber', function (req, res) {
+    app.get('/tarequests/:cnumber', isLoggedIn, function (req, res) {
         var result = new Object();
         result.tarequests = [];
         tarequests.getTARequestModel().find({ProfessorEmail: req.user.local.email, CourseNo: req.params.cnumber}, function (error, data) {
@@ -66,8 +86,8 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post('/acceptta', function (req, res) {
-        var profEmail = req.user.local.email;
+    app.post('/acceptta', isLoggedIn, function (req, res) {
+        var profEmail = req.user.local.email;//req.body.ProfessorEmail
         var studentEmail = req.body.StudentEmail;
         var courseNo = req.body.CourseNo;
         professor.getProfessorModel().findOne({ProfessorEmail: profEmail}, function (error, data) {
@@ -80,10 +100,22 @@ module.exports = function (app, passport) {
                             professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: profEmail}, {$set: {Courses: courses}},
                                 function (error, doc) {
                                 console.log(error);
-                                    tarequests.getTARequestModel().findOneAndRemove({StudentEmail: studentEmail, ProfessorEmail: profEmail, CourseNo: courseNo},
+                                    tarequests.getTARequestModel().findOne({ProfessorEmail: profEmail},
                                         function (error, data) {
+                                            for(var j = 0 ; j < data.Courses.length; j++){
+                                                if(courseNo == data.Courses[j].courseNo) {
+                                                    data.Courses[j].tas.splice(data.Courses[j].tas.indexOf(studentEmail), 1);
+                                                    tarequests.getTARequestModel().findOneAndUpdate({ProfessorEmail: profEmail}, {$set:{Courses: data.Courses}}, function (error, doc) {
+                                                        if(error)
+                                                            console.log(error);
+                                                        else {
+                                                            console.log(doc);
+                                                            return res.json(doc);
+                                                        }
+                                                    });
+                                                }
+                                            }
                                         });
-                                    return res.json(courses);
                                 });
                         }
                         else{
@@ -95,13 +127,142 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post('/rejectta', function (req, res) {
-        var profEmail = req.user.local.email;
+    app.post('/rejectta', isLoggedIn, function (req, res) {
+        var profEmail = req.user.local.email; //req.body.ProfessorEmail;
         var studentEmail = req.body.StudentEmail;
         var courseNo = req.body.CourseNo;
-        tarequests.getTARequestModel().findOneAndRemove({StudentEmail: studentEmail, ProfessorEmail: profEmail, CourseNo: courseNo},
+        tarequests.getTARequestModel().findOne({ProfessorEmail: profEmail},
             function (error, data) {
-                return res.json({"Message": "Request Rejected!"});
+                for(var j = 0 ; j < data.Courses.length; j++){
+                    if(courseNo == data.Courses[j].courseNo) {
+                        data.Courses[j].tas.splice(data.Courses[j].tas.indexOf(studentEmail), 1);
+                        tarequests.getTARequestModel().findOneAndUpdate({ProfessorEmail: profEmail}, {$set:{Courses: data.Courses}}, function (error, doc) {
+                            if(error)
+                                console.log(error);
+                            else {
+                                console.log(doc);
+                                return res.json(doc);
+                            }
+                        });
+                    }
+                }
             });
     });
+
+    app.post('/setevent', isLoggedIn, function (req, res) {
+        var eventType = req.body.eventType;
+        var ProfessorEmail = req.user.local.email;//req.body.ProfessorEmail;
+        var CourseNo = req.body.CourseNo;
+        var date = req.body.date;
+
+        professor.getProfessorModel().findOne({ProfessorEmail: ProfessorEmail}, function (error, data) {
+            for(var i = 0 ; i < data.Courses.length; i++){
+                if(data.Courses[i].courseNo == CourseNo){
+                    if(data.Courses[i].events != null){
+                        if(eventType == "midterm"){
+                            data.Courses[i].events.midterm.push(date);
+                        }
+                        else if(eventType == "final"){
+                            data.Courses[i].events.final.push(date);
+                        }
+                        else if(eventType == "quiz"){
+                            data.Courses[i].events.quiz.push(date);
+                        }
+                        else if(eventType == "assignments"){
+                            data.Courses[i].events.assignments.push(date);
+                        }
+
+                        professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                            console.log(error);
+                        });
+                        return res.json("200 OK");
+                    }
+                    else {
+                        data.Courses[i].events = new Object();
+                        data.Courses[i].events.midterm = [];
+                        data.Courses[i].events.final = [];
+                        data.Courses[i].events.quiz = [];
+                        data.Courses[i].events.assignments = [];
+                        if(eventType == "midterm"){
+                            data.Courses[i].events.midterm.push(date);
+                        }
+                        else if(eventType == "final"){
+                            data.Courses[i].events.final.push(date);
+                        }
+                        else if(eventType == "quiz"){
+                            data.Courses[i].events.quiz.push(date);
+                        }
+                        else if(eventType == "assignments"){
+                            data.Courses[i].events.assignments.push(date);
+                        }
+                        professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                            console.log(error);
+                        });
+                        return res.json("200 OK");
+                    }
+                }
+            }
+        });
+        
+    });
+
+    app.get('/getevent', isLoggedIn, function (req, res) {
+        var ProfessorEmail = req.user.local.email;
+        var CourseNo = req.query.CourseNo;
+        var eventType = req.query.eventType;
+        var results = [];
+
+        professor.getProfessorModel().findOne({ProfessorEmail: ProfessorEmail}, function (error, data) {
+            for(var i = 0 ; i < data.Courses.length; i++){
+                if(data.Courses[i].courseNo == CourseNo && CourseNo != null){
+                    if(eventType == "midterm"){
+                        return res.json(data.Courses[i].events.midterm);
+                    }
+                    else if(eventType == "final"){
+                        return res.json(data.Courses[i].events.final);
+                    }
+                    else if(eventType == "quiz"){
+                        return res.json(data.Courses[i].events.quiz);
+                    }
+                    else if(eventType == "assignments"){
+                        return res.json(data.Courses[i].events.assignments);
+                    }
+                }
+                else if(CourseNo == null){
+                    var object = new Object();
+                    object.CourseNo = data.Courses[i].courseNo;
+                    object.events = [];
+                    if(eventType == "midterm"){
+                        object.events = data.Courses[i].events.midterm;
+                        results.push(object);
+                    }
+                    else if(eventType == "final"){
+                        object.events = data.Courses[i].events.final;
+                        results.push(object);
+                    }
+                    else if(eventType == "quiz"){
+                        object.events = data.Courses[i].events.quiz;
+                        results.push(object);
+                    }
+                    else if(eventType == "assignments"){
+                        object.events = data.Courses[i].events.assignments;
+                        results.push(object);
+                    }
+                    if(i == data.Courses.length - 1){
+                        return res.json(results);
+                    }
+                }
+            }
+        });
+    });
+
+    function isLoggedIn(req, res, next) {
+
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated())
+            return next();
+
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    }
 };
