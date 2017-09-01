@@ -1,35 +1,15 @@
 
-<div>
-    <div class="mainPageObjectsTitle">
-        مدار الکترونیکی
-    </div>
-    <div class="mainPageObjectsTitle">
-        میانترم
-    </div>
-    <div class="mainPageObjectsTitle">
-        ۲۷/۱۰/۱۳۹۶
-    </div>
-</div>
-<div>
-    <div class="mainPageObjectsTitle">
-        بورد رویداد
-    </div>
-    <div class="mainPageObjects">
-        <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
-            <div class="mainPageObjects" style="margin-bottom: 10px;">
-                <div>فرستنده: {{msg.sender}}</div>
-                <div>متن پیام: {{msg.msg}}</div>
-                <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
-            </div>
+    <div>
+        <br>
+        <div class="mainPageObjectsTitle">
+            {{eventCourseNo}}
         </div>
-        <div class="field has-addons">
-            <p class="control">
-                <input id="sendmsg" ng-model="msg" class="input" type="text" size="200px">
-            </p>
-            <p class="control">
-                <button ng-click="sendMessage(CourseInfo.courseNo, msg)" class="button" style="color: white;margin-right: 5px;background: darkred;" type="submit" value="ارسال">ارسال</button>
-            </p>
+        <br>
+        <div class="mainPageObjectsTitle">
+            {{eventType}}
+        </div>
+        <br>
+        <div class="mainPageObjectsTitle">
+            {{eventDate}}
         </div>
     </div>
-</div>
-</div>

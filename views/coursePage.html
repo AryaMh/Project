@@ -10,15 +10,47 @@
                                 <div ng-hide="eventHidden" style="margin-right: 10px;">
                                     <div>
                                         میانترم
+                                        <a style="color: blue">
+                                            افزودن
+                                        </a>
+                                        <div ng-repeat="event in CourseInfo.events.midterm">
+                                            <div>
+                                                {{event}}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         پایانترم
+                                        <a style="color: blue">
+                                            افزودن
+                                        </a>
+                                        <div ng-repeat="event in CourseInfo.events.final">
+                                            <div>
+                                                {{event}}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         تمرین
+                                        <a style="color: blue">
+                                            افزودن
+                                        </a>
+                                        <div ng-repeat="event in CourseInfo.events.assignments">
+                                            <div>
+                                                {{event}}
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         امتحانک
+                                        <a style="color: blue">
+                                            افزودن
+                                        </a>
+                                        <div ng-repeat="event in CourseInfo.events.quiz">
+                                            <div>
+                                                {{event}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

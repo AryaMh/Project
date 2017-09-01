@@ -6,6 +6,10 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.courses = [];
     $scope.tas = [];
     $scope.mainPage = false;
+    $scope.midtermHidden = true;
+    $scope.finalHidden = true;
+    $scope.quizHidden = true;
+    $scope.assignmentsHidden = true;
     var allCourses = [];
 
     $http.get("/courses")
@@ -28,6 +32,14 @@ app.controller('mainCtrl', function($scope, $http) {
         $scope.mainPage = false;
     };
 
+    $scope.eventpage = function (courseNo, url, eventDate) {
+        $scope.mainPage = true;
+        $scope.eventCourseNo = courseNo;
+        $scope.eventType = url;
+        $scope.eventDate = eventDate;
+        $anchorScroll();
+
+    };
     //CoursePage
     $scope.taHidden = true;
     $scope.eventHidden = true;
@@ -36,6 +48,29 @@ app.controller('mainCtrl', function($scope, $http) {
     };
     $scope.eventToggle = function () {
         $scope.eventHidden = !$scope.eventHidden;
+    };
+
+
+    $scope.getEvent = function (url) {
+        console.log(url);
+        $http.get('/getevent?eventType='+url).then(function (res) {
+            if(url == "midterm") {
+                $scope.midtermHidden = !$scope.midtermHidden;
+                $scope.midterms = res.data;
+            }
+            if(url == "final") {
+                $scope.finalHidden = !$scope.finalHidden;
+                $scope.final = res.data;
+            }
+            if(url == "quiz") {
+                $scope.quizHidden = !$scope.quizHidden;
+                $scope.quiz = res.data;
+            }
+            if(url == "assignments") {
+                $scope.assignmentsHidden = !$scope.assignmentsHidden;
+                $scope.assignments = res.data;
+            }
+        });
     };
 
     $scope.sendMessage = function (courseNo, msg) {

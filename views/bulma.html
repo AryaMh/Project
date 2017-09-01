@@ -119,24 +119,64 @@
                         </div>
                         <div class="mainPageObjects">
                             <div>
-                                <a href="/getevent?eventType=midterm">
+                                <a ng-click="getEvent('midterm')">
                                     میانترم
                                 </a>
+                                <div ng-hide="midtermHidden" ng-repeat="midterm in midterms">
+                                    <div>
+                                        {{midterm.CourseNo}}
+                                    </div>
+                                    <div ng-repeat="event in midterm.events">
+                                        <a ng-click="eventpage(midterm.CourseNo, 'midterm', event)" href="#eventPage" style="color: blue">
+                                            {{event}}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <a href="/getevent?eventType=final">
+                                <a ng-click="getEvent('final')">
                                     پایانترم
                                 </a>
+                                <div ng-hide="finalHidden" ng-repeat="fin in final">
+                                    <div>
+                                        {{fin.CourseNo}}
+                                    </div>
+                                    <div ng-repeat="event in fin.events">
+                                        <a style="color: blue">
+                                            {{event}}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <a href="/getevent?eventType=assignments">
+                                <a ng-click="getEvent('assignments')">
                                     تمرین
                                 </a>
+                                <div ng-hide="assignmentsHidden" ng-repeat="assignment in assignments">
+                                    <div>
+                                        {{assignment.CourseNo}}
+                                    </div>
+                                    <div ng-repeat="event in assignment.events">
+                                        <a style="color: blue">
+                                            {{event}}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <a href="/getevent?eventType=quiz">
+                                <a ng-click="getEvent('quiz')">
                                     امتحانک
                                 </a>
+                                <div ng-hide="quizHidden" ng-repeat="q in quiz">
+                                    <div>
+                                        {{q.CourseNo}}
+                                    </div>
+                                    <div ng-repeat="event in q.events">
+                                        <a href="#eventPage" style="color: blue">
+                                            {{event}}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

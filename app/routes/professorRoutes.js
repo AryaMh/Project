@@ -37,6 +37,11 @@ module.exports = function (app, passport) {
        res.sendfile("D://Files//University//Project//views//coursePage.html");
     });
 
+    app.get('/eventPage', isLoggedIn, function(req, res) {
+        res.sendfile('D://Files//University//Project//views//event.html');
+        //res.render('index.ejs'); // load the index.ejs file
+    });
+
     app.get('/tas', isLoggedIn, function (req, res) {
         var professorModel = professor.getProfessorModel();
         var result = new Object();
