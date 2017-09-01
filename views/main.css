@@ -20,20 +20,21 @@
 }
 
 .mainPageObjects{
-    border: 1px solid black;
+    border: 1px solid rgba(239,239,239,0.80);
     padding: 10px;
     margin-right: 10px;
     margin-left: 10px;
     height: auto;
     display: block;
     color: black;
+    background-color: rgba(239,239,239,0.80)
 }
 
 .mainPageObjectsTitle{
     display: inline-block;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-top: 1px solid darkred;
+    border-left: 1px solid darkred;
+    border-right: 1px solid darkred;
     text-align: center;
     padding: 10px;
     margin-top: 10px;
