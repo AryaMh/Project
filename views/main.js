@@ -2,7 +2,7 @@
  * Created by ARYA on 8/30/2017.
  */
 var app = angular.module('main', ['ngRoute']);
-app.controller('mainCtrl', function($scope, $http) {
+app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.courses = [];
     $scope.tas = [];
     $scope.mainPage = false;
@@ -162,7 +162,7 @@ app.controller('mainCtrl', function($scope, $http) {
                         $scope.CourseInfo.events.final = [];
                         $scope.CourseInfo.events.final.push(object.date);
                     }
-                    $scope.newMidtermHidden = true;
+                    $scope.newFinalHidden = true;
                 }
                 else if(eventType == 'quiz'){
                         if($scope.CourseInfo.events.quiz)
@@ -171,7 +171,7 @@ app.controller('mainCtrl', function($scope, $http) {
                             $scope.CourseInfo.events.quiz = [];
                             $scope.CourseInfo.events.quiz.push(object.date);
                         }
-                        $scope.newMidtermHidden = true;
+                        $scope.newQuizHidden = true;
                     }
                 else if(eventType == 'assignments'){
                         if($scope.CourseInfo.events.assignments)
@@ -180,7 +180,7 @@ app.controller('mainCtrl', function($scope, $http) {
                             $scope.CourseInfo.events.assignments = [];
                             $scope.CourseInfo.events.assignments.push(object.date);
                         }
-                        $scope.newMidtermHidden = true;
+                        $scope.newAssignmentHidden = true;
                     }
                     //document.getElementById('messageBoard').append('<div class="mainPageObjects" style="margin-bottom: 10px;"><div>فرستنده: {{msg.sender}}</div> <div>متن پیام: {{msg.msg}}</div> <div style="position:relative; font-size: small;">تاریخ ارسال:{{msg.time}}</div></div>');
                     //console.log(response.data);

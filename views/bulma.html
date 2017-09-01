@@ -29,7 +29,7 @@
                         <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
                             درس های من
                         </div>
-                        <ul class="menu-list" style="background-color: #f1f1f1;" ng-repeat="course in courses">
+                        <ul  class="menu-list" style="background-color: #f1f1f1;" ng-repeat="course in courses">
                             <li>
                                 <a href="#coursePage" ng-click="courseInfo(course.courseNo)">{{course.courseNo}}</a>
                             </li>
@@ -37,7 +37,7 @@
                         <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
                             دستیاران من
                         </div>
-                        <ul class="menu-list" style="background-color: #f1f1f1;" ng-repeat="course in courses">
+                        <ul class="menu-list" style="background-color: #f1f1f1; overflow-y: scroll; max-height: 400px;" ng-repeat="course in courses">
                             <li>
                                 <a class="courseta">{{course.courseName}}</a>
                                 <ul ng-repeat="ta in course.tas">

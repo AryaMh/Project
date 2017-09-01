@@ -16,13 +16,13 @@
                                         <div ng-hide="newMidtermHidden">
                                             <div class="field" dir="ltr">
                                                 <p class="control">
-                                                    <input ng-model="eventTime1" class="input" name="time" type="text" placeholder="dfa">
+                                                    <input dir="rtl" ng-model="eventTime1" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
                                                 </p>
                                             </div>
                                             <div class="field">
                                                 <p class="control" style="text-align: center">
                                                     <button ng-click="submitNewEvent(CourseInfo.courseNo, 'midterm', eventTime1)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                                                       sabt
+                                                        ثبت
                                                     </button>
                                                 </p>
                                             </div>
@@ -41,13 +41,13 @@
                                         <div ng-hide="newFinalHidden">
                                             <div class="field" dir="ltr">
                                                 <p class="control">
-                                                    <input ng-model="eventTime2" class="input" name="time" type="text" placeholder="dfa">
+                                                    <input dir="rtl" ng-model="eventTime2" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
                                                 </p>
                                             </div>
                                             <div class="field">
                                                 <p class="control" style="text-align: center">
                                                     <button ng-click="submitNewEvent(CourseInfo.courseNo, 'final', eventTime2)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                                                        sabt
+                                                        ثبت
                                                     </button>
                                                 </p>
                                             </div>
@@ -60,19 +60,19 @@
                                     </div>
                                     <div>
                                         تمرین
-                                        <a ng-click="quizToggle()" style="color: blue">
+                                        <a ng-click="assignmentToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newQuizHidden">
                                             <div class="field" dir="ltr">
                                                 <p class="control">
-                                                    <input ng-model="eventTime3" class="input" name="time" type="text" placeholder="dfa">
+                                                    <input dir="rtl" ng-model="eventTime3" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
                                                 </p>
                                             </div>
                                             <div class="field">
                                                 <p class="control" style="text-align: center">
                                                     <button ng-click="submitNewEvent(CourseInfo.courseNo, 'quiz', eventTime3)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                                                        sabt
+                                                        ثبت
                                                     </button>
                                                 </p>
                                             </div>
@@ -85,19 +85,19 @@
                                     </div>
                                     <div>
                                         امتحانک
-                                        <a ng-click="assignmentToggle()" style="color: blue">
+                                        <a ng-click="quizToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newAssignmentHidden">
                                             <div class="field" dir="ltr">
                                                 <p class="control">
-                                                    <input ng-model="eventTime4" class="input" name="time" type="text" placeholder="dfa">
+                                                    <input ng-model="eventTime4" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
                                                 </p>
                                             </div>
                                             <div class="field">
                                                 <p class="control" style="text-align: center">
-                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'assignments', eventTime4)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                                                        sabt
+                                                    <button dir="rtl" ng-click="submitNewEvent(CourseInfo.courseNo, 'assignments', eventTime4)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                        ثبت
                                                     </button>
                                                 </p>
                                             </div>
