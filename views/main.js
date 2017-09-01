@@ -82,5 +82,9 @@ app.config(function($routeProvider) {
             restrict : 'A',
             templateUrl : "/mainPage/"
         })
+        .when("/eventPage/", {
+            restrict : 'A',
+            templateUrl : "/eventPage/"
+        })
 
 });
