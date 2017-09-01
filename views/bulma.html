@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>استادافزار | صفحه شخصی</title>
     <link rel="stylesheet" href="bulma.css">
     <link rel="stylesheet" href="main.css">
     <script src="angular.min.js"></script>
@@ -13,7 +13,7 @@
     <div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
         <div style="font-size: 24px; font-weight: bold;">
 
-            هنروران شریف
+            استادافزار
             <div style="float: left">
                 <a href="/logout" style="color: white;">
                 خروج
@@ -37,7 +37,7 @@
                         <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
                             دستیاران من
                         </div>
-                        <ul class="menu-list" style="background-color: #f1f1f1; overflow-y: scroll; max-height: 400px;" ng-repeat="course in courses">
+                        <ul class="menu-list" style="background-color: #f1f1f1; overflow-y: auto; max-height: 400px;" ng-repeat="course in courses">
                             <li>
                                 <a class="courseta">{{course.courseName}}</a>
                                 <ul ng-repeat="ta in course.tas">

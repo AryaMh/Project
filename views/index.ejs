@@ -1,25 +1,41 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>استادافزار</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
-        body        { padding-top:80px; }
+        @font-face {
+            font-family: "shabnam";
+            src: url("/styles/fonts/Shabnam.ttf");
+        }
+        body        { padding-top:30px; font-family: shabnam; background-color: #cacaca}
+        h1 {font-family: shabnam}
+        a {background: darkred; color: white;}
     </style>
 </head>
-<body>
-<div class="container">
+<body dir="rtl">
+<div>
+    <img src="universityLogo.jpg" style="position: fixed; z-index: -100" width="100%" height="100%">
+    <div class="container" style="z-index:100;">
+        <div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
+            <div style="font-size: 24px; font-weight: bold;">
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+                استادافزار
+            </div>
+        </div>
+        <div class="jumbotron text-center" style="background-color: rgba(202,202,202,0.65)">
+            <h1>سامانه متمرکز</h1>
+            <h1>تعامل بین استاد و دستیاران آموزشی</h1>
 
-        <p>Login or Register with:</p>
+            <br>
+            <p>برای ورود یا نام نویسی بر روی لینک ها مربوطه کلیک کنید</p>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+            <a href="/login" class="btn"><span class="fa fa-user"></span> ورود </a>
+            <a href="/signup" class="btn"><span class="fa fa-user"></span> نام نویسی</a>
+        </div>
+
     </div>
-
 </div>
 </body>
 </html>
