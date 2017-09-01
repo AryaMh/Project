@@ -14,6 +14,9 @@ module.exports = function (app, passport) {
             if(data) {
                 res.json(data.Courses);
             }
+            else {
+                res.redirect('/studentcourses');
+            }
         });
     });
 
@@ -28,6 +31,15 @@ module.exports = function (app, passport) {
                         res.json(data.Courses[i]);
                     }
                 }
+            }
+            else {
+                professorModel.findOne({"Courses": {$elemMatch:{"courseNo" : req.params.cno}}}, function (error, doc) {
+                    for(var j = 0 ; j < doc.Courses.length; j++){
+                        if(doc.Courses[j].courseNo == req.params.cno){
+                            return res.json(doc.Courses[j]);
+                        }
+                    }
+                });
             }
         });
     });
@@ -218,45 +230,91 @@ module.exports = function (app, passport) {
         var results = [];
 
         professor.getProfessorModel().findOne({ProfessorEmail: ProfessorEmail}, function (error, data) {
-            for(var i = 0 ; i < data.Courses.length; i++){
-                if(data.Courses[i].courseNo == CourseNo && CourseNo != null){
-                    if(eventType == "midterm"){
-                        return res.json(data.Courses[i].events.midterm);
+            if(data) {
+                for (var i = 0; i < data.Courses.length; i++) {
+                    if (data.Courses[i].courseNo == CourseNo && CourseNo != null) {
+                        if (eventType == "midterm") {
+                            return res.json(data.Courses[i].events.midterm);
+                        }
+                        else if (eventType == "final") {
+                            return res.json(data.Courses[i].events.final);
+                        }
+                        else if (eventType == "quiz") {
+                            return res.json(data.Courses[i].events.quiz);
+                        }
+                        else if (eventType == "assignments") {
+                            return res.json(data.Courses[i].events.assignments);
+                        }
                     }
-                    else if(eventType == "final"){
-                        return res.json(data.Courses[i].events.final);
-                    }
-                    else if(eventType == "quiz"){
-                        return res.json(data.Courses[i].events.quiz);
-                    }
-                    else if(eventType == "assignments"){
-                        return res.json(data.Courses[i].events.assignments);
+                    else if (CourseNo == null) {
+                        var object = new Object();
+                        object.CourseNo = data.Courses[i].courseNo;
+                        object.events = [];
+                        if (eventType == "midterm") {
+                            object.events = data.Courses[i].events.midterm;
+                            results.push(object);
+                        }
+                        else if (eventType == "final") {
+                            object.events = data.Courses[i].events.final;
+                            results.push(object);
+                        }
+                        else if (eventType == "quiz") {
+                            object.events = data.Courses[i].events.quiz;
+                            results.push(object);
+                        }
+                        else if (eventType == "assignments") {
+                            object.events = data.Courses[i].events.assignments;
+                            results.push(object);
+                        }
+                        if (i == data.Courses.length - 1) {
+                            return res.json(results);
+                        }
                     }
                 }
-                else if(CourseNo == null){
-                    var object = new Object();
-                    object.CourseNo = data.Courses[i].courseNo;
-                    object.events = [];
-                    if(eventType == "midterm"){
-                        object.events = data.Courses[i].events.midterm;
-                        results.push(object);
+            }
+            else {
+                professor.getProfessorModel().findOne({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, doc) {
+                    for(var i = 0 ; i < doc.Courses.length; i++){
+                        if (doc.Courses[i].courseNo == CourseNo && CourseNo != null) {
+                            if (eventType == "midterm") {
+                                return res.json(doc.Courses[i].events.midterm);
+                            }
+                            else if (eventType == "final") {
+                                return res.json(doc.Courses[i].events.final);
+                            }
+                            else if (eventType == "quiz") {
+                                return res.json(doc.Courses[i].events.quiz);
+                            }
+                            else if (eventType == "assignments") {
+                                return res.json(doc.Courses[i].events.assignments);
+                            }
+                        }
+                        else if (CourseNo == null) {
+                            var object = new Object();
+                            object.CourseNo = doc.Courses[i].courseNo;
+                            object.events = [];
+                            if (eventType == "midterm") {
+                                object.events = doc.Courses[i].events.midterm;
+                                results.push(object);
+                            }
+                            else if (eventType == "final") {
+                                object.events = doc.Courses[i].events.final;
+                                results.push(object);
+                            }
+                            else if (eventType == "quiz") {
+                                object.events = doc.Courses[i].events.quiz;
+                                results.push(object);
+                            }
+                            else if (eventType == "assignments") {
+                                object.events = doc.Courses[i].events.assignments;
+                                results.push(object);
+                            }
+                            if (i == doc.Courses.length - 1) {
+                                return res.json(results);
+                            }
+                        }
                     }
-                    else if(eventType == "final"){
-                        object.events = data.Courses[i].events.final;
-                        results.push(object);
-                    }
-                    else if(eventType == "quiz"){
-                        object.events = data.Courses[i].events.quiz;
-                        results.push(object);
-                    }
-                    else if(eventType == "assignments"){
-                        object.events = data.Courses[i].events.assignments;
-                        results.push(object);
-                    }
-                    if(i == data.Courses.length - 1){
-                        return res.json(results);
-                    }
-                }
+                });
             }
         });
     });

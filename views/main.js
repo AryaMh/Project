@@ -10,6 +10,7 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.finalHidden = true;
     $scope.quizHidden = true;
     $scope.assignmentsHidden = true;
+    var isProfessor = true;
     var allCourses = [];
 
     $http.get("/courses")
@@ -85,7 +86,7 @@ app.controller('mainCtrl', function($scope, $http) {
             data: JSON.stringify(object)
         })
             .then(function (response) {
-                object.sender = response.data.ProfessorEmail;
+                object.sender = response.data.sender;
                 if($scope.CourseInfo.messages)
                     $scope.CourseInfo.messages.push(object);
                 else {

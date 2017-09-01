@@ -2,6 +2,7 @@
  * Created by ARYA on 8/25/2017.
  */
 var tarequest = require('../models/taRequest.js');
+var professor = require('../models/professor.js');
 
 module.exports = function (app, passport) {
     app.post('/tarequest', isLoggedIn, function (req, res) {
@@ -14,6 +15,21 @@ module.exports = function (app, passport) {
         requestObject.CourseNo = courseNo;
         tarequest.add(requestObject);
         res.json({'response': '200'});
+    });
+    app.get('/studentcourses', isLoggedIn, function (req, res) {
+        var taEmail = req.user.local.email;
+
+        professor.getProfessorModel().find({}, function (error, data) {
+            var results = [];
+            for(var i = 0 ; i < data.length; i++) {
+                for (var j = 0; j < data[i].Courses.length; j++) {
+                    if (data[i].Courses[j].tas.indexOf(taEmail) != -1){
+                        results.push(data[i].Courses[j]);
+                    }
+                }
+            }
+            res.json(results);
+        });
     });
     function isLoggedIn(req, res, next) {
 

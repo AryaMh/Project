@@ -15,27 +15,55 @@ module.exports = function(app, passport, path) {
         var courseNo = req.body.courseNo;
 
         profModel.getProfessorModel().findOne({ProfessorEmail: req.user.local.email}, function (error, data) {
-            for(var i = 0 ; i < data.Courses.length; i++){
-                if(data.Courses[i].courseNo == courseNo){
-                    if(data.Courses[i].messages != null){
-                        var msgObject = new Object();
-                        msgObject.sender = req.user.local.email;
-                        msgObject.msg = msg;
-                        msgObject.time = req.body.time;
-                        data.Courses[i].messages.push(msgObject);
+            if(data) {
+                for (var i = 0; i < data.Courses.length; i++) {
+                    if (data.Courses[i].courseNo == courseNo) {
+                        if (data.Courses[i].messages != null) {
+                            var msgObject = new Object();
+                            msgObject.sender = req.user.local.email;
+                            msgObject.msg = msg;
+                            msgObject.time = req.body.time;
+                            data.Courses[i].messages.push(msgObject);
+                        }
+                        else {
+                            data.Courses[i].messages = [];
+                            var msgObject = new Object();
+                            msgObject.sender = req.user.local.email;
+                            msgObject.msg = msg;
+                            msgObject.time = req.body.time;
+                            data.Courses[i].messages.push(msgObject);
+                        }
+                        profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: req.user.local.email}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                            return res.json(msgObject);
+                        });
                     }
-                    else {
-                        data.Courses[i].messages = [];
-                        var msgObject = new Object();
-                        msgObject.sender = req.user.local.email;
-                        msgObject.msg = msg;
-                        msgObject.time = req.body.time;
-                        data.Courses[i].messages.push(msgObject);
-                    }
-                    profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: req.user.local.email}, {$set: {Courses: data.Courses}}, function (error, doc) {
-                        return res.json(doc);
-                    });
                 }
+            }
+            else {
+                    profModel.getProfessorModel().findOne({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, data) {
+                        for (var i = 0; i < data.Courses.length; i++) {
+                            if (data.Courses[i].courseNo == courseNo) {
+                                if (data.Courses[i].messages != null) {
+                                    var msgObject = new Object();
+                                    msgObject.sender = req.user.local.email;
+                                    msgObject.msg = msg;
+                                    msgObject.time = req.body.time;
+                                    data.Courses[i].messages.push(msgObject);
+                                }
+                                else {
+                                    data.Courses[i].messages = [];
+                                    var msgObject = new Object();
+                                    msgObject.sender = req.user.local.email;
+                                    msgObject.msg = msg;
+                                    msgObject.time = req.body.time;
+                                    data.Courses[i].messages.push(msgObject);
+                                }
+                                profModel.getProfessorModel().findOneAndUpdate({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                                    return res.json(msgObject);
+                                });
+                            }
+                        }
+                });
             }
         })
     });
@@ -138,13 +166,21 @@ module.exports = function(app, passport, path) {
             user : req.user // get the user out of session and pass to template
         });*/
     });
-
     // =====================================
     // LOGOUT ==============================
     // =====================================
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+    app.get('/userType', function(req, res) {
+        profModel.getProfessorModel().findOne({ProfessorEmail: req.user.local.email}, function (error, data) {
+            if(data){
+                return res.json("professor");
+            }
+            return res.json("ta");
+        })
     });
 
 };
