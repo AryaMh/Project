@@ -43,7 +43,7 @@ module.exports = function(app, passport, path) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
-        res.sendfile('D://Files//University//Project//views//login.html');
+        res.sendfile('./views/login.html');
         //res.render('index.ejs'); // load the index.ejs file
     });
 
@@ -54,7 +54,7 @@ module.exports = function(app, passport, path) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.sendfile('D://Files//University//Project//views//login.html');
+        res.sendfile('./views/login.html');
         //res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
@@ -72,7 +72,7 @@ module.exports = function(app, passport, path) {
     app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.sendfile('D://Files//University//Project//views//signup.html');
+        res.sendfile('./views/signup.html');
         //res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
@@ -133,7 +133,7 @@ module.exports = function(app, passport, path) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.sendFile('D://Files//University//Project//views//bulma.html');
+        res.sendFile('bulma.html', {root : 'D://Files//University//Project//views'});
         /*res.render('bulma.html', {
             user : req.user // get the user out of session and pass to template
         });*/

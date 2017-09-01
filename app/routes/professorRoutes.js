@@ -34,11 +34,11 @@ module.exports = function (app, passport) {
 
 
     app.get('/coursePage', isLoggedIn, function (req, res) {
-       res.sendfile("D://Files//University//Project//views//coursePage.html");
+       res.sendfile("./views/coursePage.html");
     });
 
     app.get('/eventPage', isLoggedIn, function(req, res) {
-        res.sendfile('D://Files//University//Project//views//event.html');
+        res.sendfile('./views/event.html');
         //res.render('index.ejs'); // load the index.ejs file
     });
 
