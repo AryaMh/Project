@@ -147,6 +147,13 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
             data: JSON.stringify(object)
         })
             .then(function (response) {
+                if(!$scope.courseInfo.events){
+                    $scope.CourseInfo.events = new Object();
+                    $scope.CourseInfo.events.midterm = [];
+                    $scope.CourseInfo.events.final = [];
+                    $scope.CourseInfo.events.quiz = [];
+                    $scope.CourseInfo.events.assignments = [];
+                }
                 if(eventType == 'midterm'){
                     if($scope.CourseInfo.events.midterm)
                         $scope.CourseInfo.events.midterm.push(object.date);
