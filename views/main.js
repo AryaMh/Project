@@ -34,7 +34,8 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
         $http.get("/courseInfo/"+info).then(function (res) {
             console.log(res.data.courseName);
             $scope.CourseInfo = res.data;
-            $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
+            if($scope.CourseInfo.messages)
+                $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
         });
     };
 
