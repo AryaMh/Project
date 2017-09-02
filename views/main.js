@@ -32,6 +32,29 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
         $scope.reqs = res.data;
     });
 
+
+    $scope.sendTaRequest = function(popUpProf, popUpGrade, popUpTATerms, popUpAvg, popUpTADesc, popUpFurtherDesc, ProfessorEmail, courseNo){
+        var req = new Object();
+        req.ProfessorEmail = ProfessorEmail;
+        req.CourseNo = courseNo;
+        req.StudentResume = popUpProf + "\n" + popUpGrade + "\n" + popUpTATerms + "\n" + popUpAvg + "\n" + popUpTADesc +
+            "\n" + popUpFurtherDesc;
+
+        console.log(JSON.stringify(req));
+        $http({
+            url: '/tarequest/',
+            method: "POST",
+            data: JSON.stringify(req)
+        })
+            .then(function (response) {
+                if(response.data['response'] == "200"){
+                    var elem = document.getElementById('popUpId');
+                    elem.parentNode.removeChild(elem);
+                }
+            });
+
+    };
+
     $scope.courseInfo = function(info){
         $scope.mainPage = true;
         $http.get("/courseInfo/"+info).then(function (res) {
@@ -136,6 +159,16 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
                 $scope.assignments = res.data;
             }
         });
+    };
+
+    $scope.showCourse = function (courseName, professorName, professorEmail, courseNo) {
+        $scope.showPopUp = !$scope.showPopUp;
+        var reqCourse = new Object();
+        reqCourse.courseName = courseName;
+        reqCourse.ProfessorName = professorName;
+        reqCourse.ProfessorEmail = professorEmail;
+        reqCourse.courseNo = courseNo;
+        $scope.reqCourse = reqCourse;
     };
 
     $scope.showCourses = function () {

@@ -29,6 +29,7 @@ module.exports = function (app, passport) {
                     for (var i = 0; i < data[j].Courses.length; i++) {
                         var courseObject = new Object();
                         courseObject.ProfessorName = data[j].ProfessorName;
+                        courseObject.ProfessorEmail = data[j].ProfessorEmail;
                         courseObject.courseNo = data[j].Courses[i].courseNo;
                         courseObject.courseName = data[j].Courses[i].courseName;
                         allCourses.push(courseObject);
