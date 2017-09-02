@@ -218,9 +218,11 @@
                         <div ng-click="showCourses()" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
                             لیست دروس
                         </div>
-                        <ul ng-hide="allCoursesHidden" ng-repeat="c in allCourses" class="menu-list" style="background-color: rgba(239,239,239,0.80);">
-                            <li><a ng-click="showCourse(c.courseNo, c.ProfessorName)">{{c.courseName}}</a></li>
-                        </ul>
+                        <div dir="ltr" style="overflow-y: auto; max-height: 600px;">
+                            <ul ng-hide="allCoursesHidden" ng-repeat="c in allCourses" class="menu-list" style="background-color: rgba(239,239,239,0.80);">
+                                <li><a ng-click="showCourse(c.courseNo, c.ProfessorName)">{{c.courseName}}</a></li>
+                            </ul>
+                        </div>
                     </aside>
                 </div>
 

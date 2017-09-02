@@ -33,8 +33,8 @@ module.exports = function (app, passport) {
                         courseObject.courseName = data[j].Courses[i].courseName;
                         allCourses.push(courseObject);
                     }
-                    res.json(allCourses);
                 }
+                res.json(allCourses);
             }
         });
     });
