@@ -10,7 +10,7 @@
     <script src="angular-route.js"></script>
     <script src="main.js"></script>
 </head>
-<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main">
+<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;" ng-app="main" ng-controller="mainCtrl">
     <div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
         <div style="font-size: 24px; font-weight: bold;">
 
@@ -23,7 +23,14 @@
         </div>
     </div>
     <img src="desktop.jpg" style="position: fixed; z-index: -100" width="100%" height="100%">
-    <div class="container is-fluid" ng-controller="mainCtrl">
+    <div ng-click="showPopUp = true" ng-hide="showPopUp" style="position: fixed; z-index: 500; background-color: rgba(122,122,122,0.80); min-height: 100%; min-width: 100%;">
+    </div>
+    <div ng-hide="showPopUp" dir="ltr" style="position: fixed; z-index: 501; width: 50%; height: 70%; background-color: white; left: 25%; top: 20%; border-radius: 5px">
+        <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+           {{reqCourse.courseName}}
+        </div>
+    </div>
+    <div class="container is-fluid">
         <div class="columns" style="min-height: 100vh;padding: 100px 0 0 0;">
             <div class="column" style="background-color: rgba(255,255,255,0);">
                 <div style=" height: 95%;position: relative; color: white;">
@@ -207,7 +214,16 @@
                             <li><a ng-click="showMainPage()">صفحه شخصی</a></li>
                         </ul>
                     </aside>
+                    <aside ng-hide="!isProfessor" class="menu" style="margin-top: 20px">
+                        <div ng-click="showCourses()" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                            لیست دروس
+                        </div>
+                        <ul ng-hide="allCoursesHidden" ng-repeat="c in allCourses" class="menu-list" style="background-color: rgba(239,239,239,0.80);">
+                            <li><a ng-click="showCourse(c.courseNo, c.ProfessorName)">{{c.courseName}}</a></li>
+                        </ul>
+                    </aside>
                 </div>
+
             </div>
         </div>
     </div>
