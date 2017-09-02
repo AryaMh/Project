@@ -13,6 +13,7 @@
     "connect-flash": "*",
     "cookie-parser": "*",
     "crypto": "^1.0.1",
+    "download-file": "^0.1.5",
     "ejs": "*",
     "express": "*",
     "express-session": "*",

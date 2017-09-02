@@ -14,37 +14,49 @@
                                             افزودن
                                         </a>
                                         <div class="mainPageObjects" ng-hide="newMidtermHidden">
-                                            <div class="field" dir="rtl">
-                                                <p class="control">
-                                                    <input dir="rtl" ng-model="eventTime1" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
-                                                </p>
-                                            </div>
-                                            <div class="field">
-                                                <div class="file is-info">
-                                                    <label class="file-label">
-                                                        <input class="file-input" type="file" name="resume">
-                                                        <span class="file-cta">
-                                                            <span class="file-icon">
-                                                              <i class="fa fa-upload"></i>
-                                                            </span>
-                                                            <span class="file-label">
-                                                                افزودن فایل
-                                                            </span>
-                                                        </span>
-                                                    </label>
+                                            <form action="/fileUpload" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="courseNo" value="{{CourseInfo.courseNo}}">
+                                                <input type="text" name="eventType" value="midterm">
+                                                <div class="field" dir="rtl">
+                                                    <p class="control">
+                                                        <input dir="rtl" ng-model="eventTime1" class="input" name="time" type="text" placeholder="ثبت تاریخ ساعت و مکان">
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <div class="field">
-                                                <p class="control" style="text-align: center">
-                                                    <button ng-click="submitNewEvent(CourseInfo.courseNo, 'midterm', eventTime1)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                                                        ثبت
-                                                    </button>
-                                                </p>
-                                            </div>
+                                                <div class="field">
+                                                        <div class="file is-info">
+                                                            <label class="file-label">
+                                                                <input class="file-input" type="file" name="filetoupload">
+                                                                <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                      <i class="fa fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        افزودن فایل
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control" style="text-align: center">
+                                                        <button ng-click="submitNewEvent(CourseInfo.courseNo, 'midterm', eventTime1)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                            ثبت
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </form>
                                         </div>
                                         <div ng-repeat="event in CourseInfo.events.midterm">
                                             <div>
                                                 {{event}}
+                                            </div>
+                                        </div>
+                                        <div style="color: white">
+                                            فایلهای مربوطه
+                                            <div ng-repeat="file in CourseInfo.events.midtermfiles">
+                                                <div>
+                                                    <a href="/download?name={{file}}">{{file}}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -87,6 +99,14 @@
                                                 {{event}}
                                             </div>
                                         </div>
+                                        <div style="color: white">
+                                            فایلهای مربوطه
+                                            <div ng-repeat="file in CourseInfo.events.finalfiles">
+                                                <div>
+                                                    <a href="/download?name={{file}}">{{file}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         تمرین
@@ -127,6 +147,14 @@
                                                 {{event}}
                                             </div>
                                         </div>
+                                        <div style="color: white">
+                                            فایلهای مربوطه
+                                            <div ng-repeat="file in CourseInfo.events.assignmentsfiles">
+                                                <div>
+                                                    <a href="/download?name={{file}}">{{file}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         امتحانک
@@ -165,6 +193,14 @@
                                         <div ng-repeat="event in CourseInfo.events.quiz">
                                             <div>
                                                 {{event}}
+                                            </div>
+                                        </div>
+                                        <div style="color: white">
+                                            فایلهای مربوطه
+                                            <div ng-repeat="file in CourseInfo.events.quizfiles">
+                                                <div>
+                                                    <a href="/download?name={{file}}">{{file}}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

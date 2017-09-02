@@ -6,10 +6,14 @@ var api_key = 'key-92037e9f088b0f8d850d6929ca7936ff';
 var domain = 'sandboxfe21b99a90194e60ab5bc0c166073e31.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 var profModel = require('../models/professor.js');
+var formidable = require('formidable');
+var fs = require('fs');
+
+process.env.TMPDIR = '.';
 
 module.exports = function(app, passport, path) {
 
-    app.post('/sendMessage',function (req, res) {
+    app.post('/sendMessage', isLoggedIn, function (req, res) {
         console.log(req.body);
         var msg = req.body.msg;
         var courseNo = req.body.courseNo;
@@ -67,6 +71,63 @@ module.exports = function(app, passport, path) {
             }
         })
     });
+
+    app.post('/fileUpload', isLoggedIn, function (req, res) {
+        {
+            var form = new formidable.IncomingForm();
+            form.parse(req, function (err, fields, files) {
+                var courseNo = fields.courseNo;
+                var professorEmail = req.user.local.email;
+                var eventType = fields.eventType;
+                var oldpath = 'D://Files//University//Project//views//Temp//';
+                var newpath = 'D://Files//University//Project//views//' + files.filetoupload.name;
+                profModel.getProfessorModel().findOne({ProfessorEmail: professorEmail}, function (error, data) {
+                    if(data){
+                        for(var i = 0 ; i < data.Courses.length; i++){
+                            if(data.Courses[i].courseNo == courseNo){
+                                if(eventType == 'midterm'){
+                                    if(data.Courses[i].events.midtermfiles == null)
+                                        data.Courses[i].events.midtermfiles = [];
+                                    data.Courses[i].events.midtermfiles.push(files.filetoupload.name);
+                                }
+                                else if(eventType == 'final'){
+                                    if(data.Courses[i].events.finalfiles == null)
+                                        data.Courses[i].events.finalfiles = [];
+                                    data.Courses[i].events.finalfiles.push(files.filetoupload.name);
+                                }
+                                else if(eventType == 'quiz'){
+                                    if(data.Courses[i].events.quizfiles == null)
+                                        data.Courses[i].events.quizfiles = [];
+                                    data.Courses[i].events.quizfiles.push(files.filetoupload.name);
+                                }
+                                else if(eventType == 'assignments'){
+                                    if(data.Courses[i].events.assignmentsfiles == null)
+                                        data.Courses[i].events.assignmentsfiles = [];
+                                    data.Courses[i].events.assignmentsfiles.push(files.filetoupload.name);
+                                }
+                            }
+                        }
+                        profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: professorEmail}, {$set:{Courses: data.Courses}},function (error, doc) {
+                            fs.writeFile(newpath, files.filetoupload, function (err) {
+                                if (err) throw err;
+                                console.log('Replaced!');
+                            });
+                            return res.redirect('/profile');
+                        });
+                    }
+                });
+            });
+        }
+    });
+
+    app.get('/download', isLoggedIn, function (req, res) {
+        var url = "D://Files//University//Project//views//"+req.query.name;
+        var filename = req.query.name;
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        var filestream = fs.createReadStream(url);
+        filestream.pipe(res);
+    });
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
@@ -174,7 +235,7 @@ module.exports = function(app, passport, path) {
         res.redirect('/');
     });
 
-    app.get('/userType', function(req, res) {
+    app.get('/userType', isLoggedIn, function(req, res) {
         profModel.getProfessorModel().findOne({ProfessorEmail: req.user.local.email}, function (error, data) {
             if(data){
                 return res.json("professor");
