@@ -12,13 +12,14 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.assignmentsHidden = true;
     $scope.taAcceptorRejectHidden = true;
 
-    var isProfessor = true;
+    $scope.isProfessor = true;
     var allCourses = [];
 
     $http.get("/userType")
         .then(function(response) {
             if(response.data == "professor"){
                 $scope.taAcceptorRejectHidden = false;
+                $scope.isProfessor = false;
             }
         });
     $http.get("/courses")

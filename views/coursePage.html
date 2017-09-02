@@ -10,7 +10,7 @@
                                 <div ng-hide="eventHidden" style="margin-right: 10px;">
                                     <div>
                                         میانترم
-                                        <a ng-click="midtermToggle()" style="color: blue">
+                                        <a ng-hide="isProfessor" ng-click="midtermToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newMidtermHidden">
@@ -35,7 +35,7 @@
                                     </div>
                                     <div>
                                         پایانترم
-                                        <a ng-click="finalToggle()" style="color: blue">
+                                        <a ng-hide="isProfessor" ng-click="finalToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newFinalHidden">
@@ -60,7 +60,7 @@
                                     </div>
                                     <div>
                                         تمرین
-                                        <a ng-click="assignmentToggle()" style="color: blue">
+                                        <a ng-hide="isProfessor" ng-click="assignmentToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newQuizHidden">
@@ -85,7 +85,7 @@
                                     </div>
                                     <div>
                                         امتحانک
-                                        <a ng-click="quizToggle()" style="color: blue">
+                                        <a ng-hide="isProfessor" ng-click="quizToggle()" style="color: blue">
                                             افزودن
                                         </a>
                                         <div ng-hide="newAssignmentHidden">
