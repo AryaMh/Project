@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <img src="desktop.jpg" style="position: fixed; z-index: -100" width="100%" height="100%">
+    <img src="mainpage2.jpg" style="position: fixed; z-index: -100" width="100%" height="100%">
     <div ng-click="showPopUp = true" ng-hide="showPopUp" style="position: fixed; z-index: 500; background-color: rgba(122,122,122,0.80); min-height: 100%; min-width: 100%;">
     </div>
     <div id="popUpId" ng-hide="showPopUp" dir="rtl" style="position: fixed; z-index: 501; width: 22%; overflow-y: auto; height: 80%; background-color: rgba(220,220,220,0.90); left: 39%; top: 10%; border-radius: 5px">
@@ -78,18 +78,22 @@
             <div class="column" style="background-color: rgba(255,255,255,0);">
                 <div style=" height: 95%;position: relative; color: white;">
                     <aside class="menu">
-                        <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                        <div ng-click="myCoursesHidden = !myCoursesHidden" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                            <span ng-hide="!myCoursesHidden" class="fa fa-angle-left"></span>
+                            <span ng-hide="myCoursesHidden" class="fa fa-angle-down"></span>
                             درس های من
                         </div>
-                        <ul  class="menu-list" style="background-color: rgba(239,239,239,0.90);" ng-repeat="course in courses">
+                        <ul ng-hide="myCoursesHidden" class="menu-list" style="background-color: rgba(239,239,239,0.90);" ng-repeat="course in courses">
                             <li>
                                 <a href="#coursePage" ng-click="courseInfo(course.courseNo)">{{course.courseNo}}</a>
                             </li>
                         </ul>
-                        <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                        <div ng-click="myTasHidden = !myTasHidden" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                            <span ng-hide="!myTasHidden" class="fa fa-angle-left"></span>
+                            <span ng-hide="myTasHidden" class="fa fa-angle-down"></span>
                             دستیاران من
                         </div>
-                        <ul class="menu-list" style="background-color: rgba(239,239,239,0.90); overflow-y: auto; max-height: 400px;" ng-repeat="course in courses">
+                        <ul ng-hide="myTasHidden" class="menu-list" style="background-color: rgba(239,239,239,0.90); overflow-y: auto; max-height: 400px;" ng-repeat="course in courses">
                             <li>
                                 <a class="courseta">{{course.courseName}}</a>
                                 <ul ng-repeat="ta in course.tas">
@@ -99,10 +103,12 @@
                                 </ul>
                             </li>
                         </ul>
-                        <div class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                        <div ng-click="myEventsHidden = !myEventsHidden" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+                            <span ng-hide="!myEventsHidden" class="fa fa-angle-left"></span>
+                            <span ng-hide="myEventsHidden" class="fa fa-angle-down"></span>
                             رخدادها
                         </div>
-                        <ul class="menu-list" style="background-color: rgba(239,239,239,0.75);">
+                        <ul ng-hide="myEventsHidden" class="menu-list" style="background-color: rgba(239,239,239,0.75);">
                             <li><a>میانترم</a></li>
                             <li><a>پایان ترم</a></li>
                             <li><a>تمرین</a></li>
@@ -114,7 +120,7 @@
                     </aside>
                 </div>
             </div>
-            <div class="column is-8" style="background-color: rgba(215,215,215,0.75);box-shadow: 0 0 5px rgba(0,0,0,0.7)">
+            <div class="column is-8" style="background-color: rgba(215,215,215,0.20);box-shadow: 0 0 5px rgba(0,0,0,0.7)">
 
                 <div ng-hide="mainPage">
                     <div>
@@ -259,8 +265,8 @@
                     </aside>
                     <aside ng-hide="!isProfessor" class="menu" style="margin-top: 20px">
                         <div ng-click="showCourses()" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
-                            <span ng-hide="!allCoursesHidden" class="fa fa-chevron-left"></span>
-                            <span ng-hide="allCoursesHidden" class="fa fa-chevron-down"></span>
+                            <span ng-hide="!allCoursesHidden" class="fa fa-angle-left"></span>
+                            <span ng-hide="allCoursesHidden" class="fa fa-angle-down"></span>
                             لیست دروس
                         </div>
                         <div dir="ltr" style="overflow-y: auto; max-height: 600px;">

@@ -13,6 +13,9 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.taAcceptorRejectHidden = true;
     $scope.allCoursesHidden = true;
     $scope.showPopUp = true;
+    $scope.myTasHidden = true;
+    $scope.myCoursesHidden = true;
+    $scope.myEventsHidden = true;
 
     $scope.isProfessor = true;
     $scope.allCourses = [];
