@@ -108,12 +108,14 @@
                                             <li>
                                                 {{course.courseNo}}:
                                                 <ul ng-repeat="ta in course.tas">
-                                                    <div id="{{ta}}" ng-model="taAcceptorRejectHidden" style="display: inline-block">
-                                                        {{ta}}
+                                                    <div id="{{ta.StudentEmail}}" ng-model="taAcceptorRejectHidden" style="display: inline-block">
+                                                        {{ta.StudentEmail}}
                                                         <span style="white-space:pre"> --- </span>
-                                                        <a ng-click="acceptta(ta, course.courseNo)" style="color: green">قبول</a>
+                                                        <a ng-click="acceptta(ta.StudentEmail, course.courseNo)" style="color: green">قبول</a>
                                                         |
-                                                        <a ng-click="rejectta(ta, course.courseNo)" style="color: red">رد</a>
+                                                        <a ng-click="rejectta(ta.StudentEmail, course.courseNo)" style="color: red">رد</a>
+                                                        <div>رزومه دانشجو:</div>
+                                                        <div>{{ta.StudentResume}}</div>
                                                     </div>
                                                 </ul>
                                             </li>

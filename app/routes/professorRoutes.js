@@ -20,6 +20,23 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get('/allCourses', isLoggedIn, function (req, res) {
+        var professorModel = professor.getProfessorModel();
+        var allCourses = [];
+        professorModel.find({}, function(error, data) {
+            if(data) {
+                for(var i = 0 ; i < data.Courses.length; i++){
+                    var courseObject = new Object();
+                    courseObject.ProfessorName = data.ProfessorName;
+                    courseObject.courseNo = data.Courses[i].courseNo;
+                    courseObject.courseName = data.Courses[i].courseName;
+                    allCourses.push(courseObject);
+                }
+                res.json(allCourses);
+            }
+        });
+    });
+
     app.get('/courseInfo/:cno', isLoggedIn, function (req, res) {
         var professorModel = professor.getProfessorModel();
         var result = new Object();

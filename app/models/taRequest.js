@@ -28,7 +28,10 @@ module.exports.add = function (requestObject) {
                                 if(data.Courses[i].courseNo == requestObject.CourseNo)
                                 {
                                     if(data.Courses[i].tas.indexOf(requestObject.StudentEmail) == -1) {
-                                        data.Courses[i].tas.push(requestObject.StudentEmail);
+                                        var taobj = new Object();
+                                        taobj.StudentEmail = requestObject.StudentEmail;
+                                        taobj.StudentResume = requestObject.StudentResume;
+                                        data.Courses[i].tas.push(taobj);
                                         courseFound = true;
                                     }
                                     else {
@@ -40,7 +43,10 @@ module.exports.add = function (requestObject) {
                                 var obj = new Object();
                                 obj.courseNo = requestObject.CourseNo;
                                 obj.tas = [];
-                                obj.tas.push(requestObject.StudentEmail);
+                                var taobj = new Object();
+                                taobj.StudentEmail = requestObject.StudentEmail;
+                                taobj.StudentResume = requestObject.StudentResume;
+                                obj.tas.push(taobj);
                                 data.Courses.push(obj);
                             }
                             TARequestModel.findOneAndUpdate({ProfessorEmail: requestObject.ProfessorEmail}, {$set:{Courses: data.Courses}},function (error, doc) {});
@@ -50,7 +56,10 @@ module.exports.add = function (requestObject) {
                             var obj = new Object();
                             obj.courseNo = requestObject.CourseNo;
                             obj.tas = [];
-                            obj.tas.push(requestObject.StudentEmail);
+                            var taobj = new Object();
+                            taobj.StudentEmail = requestObject.StudentEmail;
+                            taobj.StudentResume = requestObject.StudentResume;
+                            obj.tas.push(taobj);
                             Courses.push(obj);
                             new TARequestModel({ProfessorEmail: requestObject.ProfessorEmail
                                 ,Courses: Courses}).save();

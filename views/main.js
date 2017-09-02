@@ -11,9 +11,11 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.quizHidden = true;
     $scope.assignmentsHidden = true;
     $scope.taAcceptorRejectHidden = true;
+    $scope.allCoursesHidden = true;
+    $scope.showPopUp = true;
 
     $scope.isProfessor = true;
-    var allCourses = [];
+    $scope.allCourses = [];
 
     $http.get("/userType")
         .then(function(response) {
@@ -135,7 +137,15 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
             }
         });
     };
-    
+
+    $scope.showCourses = function () {
+        $scope.allCoursesHidden = !$scope.allCoursesHidden;
+        $http.get("/allCourses")
+            .then(function(response) {
+                $scope.allCourses = response.data;
+            });
+    };
+
     $scope.submitNewEvent = function (courseNo, eventType, eventDate) {
         var object = new Object();
         object.eventType = eventType;

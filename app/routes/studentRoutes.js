@@ -5,7 +5,7 @@ var tarequest = require('../models/taRequest.js');
 var professor = require('../models/professor.js');
 
 module.exports = function (app, passport) {
-    app.post('/tarequest', isLoggedIn, function (req, res) {
+    app.post('/tarequest', function (req, res) {
         var profEmail = req.body.ProfessorEmail;
         var studentUser = req.user.local.email;//req.body.StudentEmail;
         var courseNo = req.body.CourseNo;
@@ -13,6 +13,7 @@ module.exports = function (app, passport) {
         requestObject.ProfessorEmail = profEmail;
         requestObject.StudentEmail = studentUser;
         requestObject.CourseNo = courseNo;
+        requestObject.StudentResume = req.body.StudentResume;
         tarequest.add(requestObject);
         res.json({'response': '200'});
     });
