@@ -173,54 +173,55 @@ module.exports = function (app, passport) {
         var date = req.body.date;
 
         professor.getProfessorModel().findOne({ProfessorEmail: ProfessorEmail}, function (error, data) {
-            for(var i = 0 ; i < data.Courses.length; i++){
-                if(data.Courses[i].courseNo == CourseNo){
-                    if(data.Courses[i].events != null){
-                        if(eventType == "midterm"){
-                            data.Courses[i].events.midterm.push(date);
-                        }
-                        else if(eventType == "final"){
-                            data.Courses[i].events.final.push(date);
-                        }
-                        else if(eventType == "quiz"){
-                            data.Courses[i].events.quiz.push(date);
-                        }
-                        else if(eventType == "assignments"){
-                            data.Courses[i].events.assignments.push(date);
-                        }
+            if(data) {
+                for (var i = 0; i < data.Courses.length; i++) {
+                    if (data.Courses[i].courseNo == CourseNo) {
+                        if (data.Courses[i].events != null) {
+                            if (eventType == "midterm") {
+                                data.Courses[i].events.midterm.push(date);
+                            }
+                            else if (eventType == "final") {
+                                data.Courses[i].events.final.push(date);
+                            }
+                            else if (eventType == "quiz") {
+                                data.Courses[i].events.quiz.push(date);
+                            }
+                            else if (eventType == "assignments") {
+                                data.Courses[i].events.assignments.push(date);
+                            }
 
-                        professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
-                            console.log(error);
-                        });
-                        return res.json("200 OK");
-                    }
-                    else {
-                        data.Courses[i].events = new Object();
-                        data.Courses[i].events.midterm = [];
-                        data.Courses[i].events.final = [];
-                        data.Courses[i].events.quiz = [];
-                        data.Courses[i].events.assignments = [];
-                        if(eventType == "midterm"){
-                            data.Courses[i].events.midterm.push(date);
+                            professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                                console.log(error);
+                            });
+                            return res.json("200 OK");
                         }
-                        else if(eventType == "final"){
-                            data.Courses[i].events.final.push(date);
+                        else {
+                            data.Courses[i].events = new Object();
+                            data.Courses[i].events.midterm = [];
+                            data.Courses[i].events.final = [];
+                            data.Courses[i].events.quiz = [];
+                            data.Courses[i].events.assignments = [];
+                            if (eventType == "midterm") {
+                                data.Courses[i].events.midterm.push(date);
+                            }
+                            else if (eventType == "final") {
+                                data.Courses[i].events.final.push(date);
+                            }
+                            else if (eventType == "quiz") {
+                                data.Courses[i].events.quiz.push(date);
+                            }
+                            else if (eventType == "assignments") {
+                                data.Courses[i].events.assignments.push(date);
+                            }
+                            professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                                console.log(error);
+                            });
+                            return res.json("200 OK");
                         }
-                        else if(eventType == "quiz"){
-                            data.Courses[i].events.quiz.push(date);
-                        }
-                        else if(eventType == "assignments"){
-                            data.Courses[i].events.assignments.push(date);
-                        }
-                        professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
-                            console.log(error);
-                        });
-                        return res.json("200 OK");
                     }
                 }
             }
         });
-        
     });
 
     app.get('/getevent', isLoggedIn, function (req, res) {
