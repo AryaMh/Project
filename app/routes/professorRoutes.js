@@ -25,14 +25,16 @@ module.exports = function (app, passport) {
         var allCourses = [];
         professorModel.find({}, function(error, data) {
             if(data) {
-                for(var i = 0 ; i < data.Courses.length; i++){
-                    var courseObject = new Object();
-                    courseObject.ProfessorName = data.ProfessorName;
-                    courseObject.courseNo = data.Courses[i].courseNo;
-                    courseObject.courseName = data.Courses[i].courseName;
-                    allCourses.push(courseObject);
+                for (var j = 0; j < data.length; j++) {
+                    for (var i = 0; i < data[j].Courses.length; i++) {
+                        var courseObject = new Object();
+                        courseObject.ProfessorName = data.ProfessorName;
+                        courseObject.courseNo = data.Courses[i].courseNo;
+                        courseObject.courseName = data.Courses[i].courseName;
+                        allCourses.push(courseObject);
+                    }
+                    res.json(allCourses);
                 }
-                res.json(allCourses);
             }
         });
     });
