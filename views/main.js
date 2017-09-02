@@ -148,7 +148,7 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
             data: JSON.stringify(object)
         })
             .then(function (response) {
-                if(!$scope.courseInfo.events){
+                if($scope.CourseInfo.events == null){
                     $scope.CourseInfo.events = new Object();
                     $scope.CourseInfo.events.midterm = [];
                     $scope.CourseInfo.events.final = [];
