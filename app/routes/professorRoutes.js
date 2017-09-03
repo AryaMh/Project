@@ -294,45 +294,49 @@ module.exports = function (app, passport) {
                 }
             }
             else {
-                professor.getProfessorModel().findOne({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, doc) {
-                    for(var i = 0 ; i < doc.Courses.length; i++){
-                        if (doc.Courses[i].courseNo == CourseNo && CourseNo != null) {
-                            if (eventType == "midterm") {
-                                return res.json(doc.Courses[i].events.midterm);
+                professor.getProfessorModel().find({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, doc) {
+                    for(var j = 0 ; j < doc.length ; j++) {
+                        for (var i = 0; i < doc[j].Courses.length; i++) {
+                            if (doc[j].Courses[i].courseNo == CourseNo && CourseNo != null) {
+                                if (eventType == "midterm") {
+                                    return res.json(doc[j].Courses[i].events.midterm);
+                                }
+                                else if (eventType == "final") {
+                                    return res.json(doc[j].Courses[i].events.final);
+                                }
+                                else if (eventType == "quiz") {
+                                    return res.json(doc[j].Courses[i].events.quiz);
+                                }
+                                else if (eventType == "assignments") {
+                                    return res.json(doc[j].Courses[i].events.assignments);
+                                }
                             }
-                            else if (eventType == "final") {
-                                return res.json(doc.Courses[i].events.final);
-                            }
-                            else if (eventType == "quiz") {
-                                return res.json(doc.Courses[i].events.quiz);
-                            }
-                            else if (eventType == "assignments") {
-                                return res.json(doc.Courses[i].events.assignments);
+                            else if (CourseNo == null && doc[j].Courses[i].events != null) {
+                                var object = new Object();
+                                object.CourseNo = doc[j].Courses[i].courseNo;
+                                object.CourseName = doc[j].Courses[i].courseName;
+                                object.events = [];
+                                if (eventType == "midterm") {
+                                    object.events = doc[j].Courses[i].events.midterm;
+                                    results.push(object);
+                                }
+                                else if (eventType == "final") {
+                                    object.events = doc[j].Courses[i].events.final;
+                                    results.push(object);
+                                }
+                                else if (eventType == "quiz") {
+                                    object.events = doc[j].Courses[i].events.quiz;
+                                    results.push(object);
+                                }
+                                else if (eventType == "assignments") {
+                                    object.events = doc[j].Courses[i].events.assignments;
+                                    results.push(object);
+                                }
                             }
                         }
-                        else if (CourseNo == null) {
-                            var object = new Object();
-                            object.CourseNo = doc.Courses[i].courseNo;
-                            object.events = [];
-                            if (eventType == "midterm") {
-                                object.events = doc.Courses[i].events.midterm;
-                                results.push(object);
-                            }
-                            else if (eventType == "final") {
-                                object.events = doc.Courses[i].events.final;
-                                results.push(object);
-                            }
-                            else if (eventType == "quiz") {
-                                object.events = doc.Courses[i].events.quiz;
-                                results.push(object);
-                            }
-                            else if (eventType == "assignments") {
-                                object.events = doc.Courses[i].events.assignments;
-                                results.push(object);
-                            }
-                            if (i == doc.Courses.length - 1) {
-                                return res.json(results);
-                            }
+
+                        if (j == doc.length - 1) {
+                            return res.json(results);
                         }
                     }
                 });

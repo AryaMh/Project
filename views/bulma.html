@@ -190,10 +190,10 @@
                                     میانترم
                                 </a>
                                 <div ng-hide="midtermHidden" ng-repeat="midterm in midterms">
-                                    <div>
-                                        {{midterm.CourseNo}}
+                                    <div class="mainPageObjectsTitle">
+                                        {{midterm.CourseName}}
                                     </div>
-                                    <div ng-repeat="event in midterm.events">
+                                    <div class="mainPageObjects" ng-repeat="event in midterm.events" style="margin-bottom: 2px;">
                                         <a ng-click="eventpage(midterm.CourseNo, 'midterm', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
@@ -205,11 +205,11 @@
                                     پایانترم
                                 </a>
                                 <div ng-hide="finalHidden" ng-repeat="fin in final">
-                                    <div>
-                                        {{fin.CourseNo}}
+                                    <div class="mainPageObjectsTitle">
+                                        {{fin.CourseName}}
                                     </div>
-                                    <div ng-repeat="event in fin.events">
-                                        <a style="color: blue">
+                                    <div class="mainPageObjects" ng-repeat="event in fin.events" style="margin-bottom: 2px">
+                                        <a ng-click="eventpage(fin.CourseNo, 'final', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
@@ -220,11 +220,11 @@
                                     تمرین
                                 </a>
                                 <div ng-hide="assignmentsHidden" ng-repeat="assignment in assignments">
-                                    <div>
-                                        {{assignment.CourseNo}}
+                                    <div class="mainPageObjectsTitle">
+                                        {{assignment.CourseName}}
                                     </div>
-                                    <div ng-repeat="event in assignment.events">
-                                        <a style="color: blue">
+                                    <div class="mainPageObjects" ng-repeat="event in assignment.events" style="margin-bottom: 2px;">
+                                        <a ng-click="eventpage(assignment.CourseNo, 'assignments', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
@@ -235,11 +235,11 @@
                                     امتحانک
                                 </a>
                                 <div ng-hide="quizHidden" ng-repeat="q in quiz">
-                                    <div>
-                                        {{q.CourseNo}}
+                                    <div class="mainPageObjectsTitle">
+                                        {{q.CourseName}}
                                     </div>
-                                    <div ng-repeat="event in q.events">
-                                        <a href="#eventPage" style="color: blue">
+                                    <div class="mainPageObjects" ng-repeat="event in q.events" style="margin-bottom: 2px;">
+                                        <a ng-click="eventpage(q.CourseNo, 'quiz', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
