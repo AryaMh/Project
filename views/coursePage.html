@@ -6,10 +6,16 @@
                     <div style="margin-right: 10px; margin-top: 10px;">
                         <div style="color: black;">
                             <div>
-                               <a ng-click="eventToggle()"> رخدادها</a>
+                               <a ng-click="eventToggle()" class="mainPageObjectsTitle">
+                                   <span ng-hide="!eventHidden" class="fa fa-angle-left"></span>
+                                   <span ng-hide="eventHidden" class="fa fa-angle-down"></span>
+                                   رخدادها
+                               </a>
                                 <div ng-hide="eventHidden" style="margin-right: 10px;">
-                                    <div>
+                                    <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                        <div class="mainPageObjectsTitle">
                                         میانترم
+                                        </div>
                                         <a ng-hide="isProfessor" ng-click="midtermToggle()" style="color: blue">
                                             افزودن
                                         </a>
@@ -51,7 +57,7 @@
                                                 {{event}}
                                             </div>
                                         </div>
-                                        <div style="color: white">
+                                        <div style="color: blue">
                                             فایلهای مربوطه
                                             <div ng-repeat="file in CourseInfo.events.midtermfiles">
                                                 <div>
@@ -60,8 +66,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                        <div class="mainPageObjectsTitle">
                                         پایانترم
+                                        </div>
                                         <a ng-hide="isProfessor" ng-click="finalToggle()" style="color: blue">
                                             افزودن
                                         </a>
@@ -103,7 +111,7 @@
                                                 {{event}}
                                             </div>
                                         </div>
-                                        <div style="color: white">
+                                        <div style="color: blue">
                                             فایلهای مربوطه
                                             <div ng-repeat="file in CourseInfo.events.finalfiles">
                                                 <div>
@@ -112,8 +120,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                        <div class="mainPageObjectsTitle">
                                         تمرین
+                                        </div>
                                         <a ng-hide="isProfessor" ng-click="assignmentToggle()" style="color: blue">
                                             افزودن
                                         </a>
@@ -155,7 +165,7 @@
                                                 {{event}}
                                             </div>
                                         </div>
-                                        <div style="color: white">
+                                        <div style="color: blue">
                                             فایلهای مربوطه
                                             <div ng-repeat="file in CourseInfo.events.assignmentsfiles">
                                                 <div>
@@ -164,8 +174,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                        <div class="mainPageObjectsTitle">
                                         امتحانک
+                                        </div>
                                         <a ng-hide="isProfessor" ng-click="quizToggle()" style="color: blue">
                                             افزودن
                                         </a>
@@ -207,7 +219,7 @@
                                                 {{event}}
                                             </div>
                                         </div>
-                                        <div style="color: white">
+                                        <div style="color: blue">
                                             فایلهای مربوطه
                                             <div ng-repeat="file in CourseInfo.events.quizfiles">
                                                 <div>
@@ -219,12 +231,14 @@
                                 </div>
                             </div>
                             <div>
-                                <a  ng-click="taToggle()">دستیاران آموزشی</a>
-                                <div ng-hide="taHidden" style="margin-right: 10px;">
+                                <a  ng-click="taToggle()" class="mainPageObjectsTitle">
+                                    <span ng-hide="!eventHidden" class="fa fa-angle-left"></span>
+                                    <span ng-hide="eventHidden" class="fa fa-angle-down"></span>دستیاران آموزشی</a>
+                                <div class="mainPageObjects" ng-hide="taHidden" style="margin-right: 10px;">
                                     <div ng-repeat="ta in CourseInfo.tas">
-                                        <div>
+                                        <a href="mailto:{{ta}}">
                                             {{ta}}
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

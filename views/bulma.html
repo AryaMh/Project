@@ -98,12 +98,12 @@
                                 <a class="courseta">{{course.courseName}}</a>
                                 <ul ng-repeat="ta in course.tas">
                                     <li>
-                                        <a>{{ta}}</a>
+                                        <a href="mailto:{{ta}}">{{ta}}</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
-                        <div ng-click="myEventsHidden = !myEventsHidden" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
+<!--                        <div ng-click="myEventsHidden = !myEventsHidden" class="menu-label" style="margin-bottom: 0 ;font-size: medium; text-align: center; padding: 10px 0; background-color: darkred; color: #FFF;">
                             <span ng-hide="!myEventsHidden" class="fa fa-angle-left"></span>
                             <span ng-hide="myEventsHidden" class="fa fa-angle-down"></span>
                             رخدادها
@@ -113,7 +113,7 @@
                             <li><a>پایان ترم</a></li>
                             <li><a>تمرین</a></li>
                             <li><a>امتحانک</a></li>
-                        </ul>
+                        </ul>-->
                     </aside>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                                         {{course.courseName}}:
                                         <ul ng-repeat="ta in course.tas">
                                             <li>
-                                                <a>{{ta}}</a>
+                                                <a href="mailto:{{ta}}">{{ta}}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -162,7 +162,7 @@
                                                 {{course.courseNo}}:
                                                 <ul ng-repeat="ta in course.tas">
                                                     <div id="{{ta.StudentEmail}}" style="display: inline-block">
-                                                        {{ta.StudentEmail}}
+                                                        <a href="mailto:{{ta.StudentEmail}}">{{ta.StudentEmail}}</a>
                                                         <div ng-hide="taAcceptorRejectHidden">
                                                             <span style="white-space:pre"> --- </span>
                                                             <a ng-click="acceptta(ta.StudentEmail, course.courseNo)" style="color: green">قبول</a>
