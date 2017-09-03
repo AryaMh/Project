@@ -270,6 +270,7 @@ module.exports = function (app, passport) {
                     else if (CourseNo == null) {
                         var object = new Object();
                         object.CourseNo = data.Courses[i].courseNo;
+                        object.CourseName = data.Courses[i].courseName;
                         object.events = [];
                         if (eventType == "midterm") {
                             object.events = data.Courses[i].events.midterm;

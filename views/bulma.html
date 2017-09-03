@@ -194,7 +194,7 @@
                                         {{midterm.CourseName}}
                                     </div>
                                     <div class="mainPageObjects" ng-repeat="event in midterm.events" style="margin-bottom: 2px;">
-                                        <a ng-click="eventpage(midterm.CourseNo, 'midterm', event)" href="#eventPage" style="color: blue">
+                                        <a ng-click="eventpage(midterm.CourseName, 'midterm', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
@@ -209,7 +209,7 @@
                                         {{fin.CourseName}}
                                     </div>
                                     <div class="mainPageObjects" ng-repeat="event in fin.events" style="margin-bottom: 2px">
-                                        <a ng-click="eventpage(fin.CourseNo, 'final', event)" href="#eventPage" style="color: blue">
+                                        <a ng-click="eventpage(fin.CourseName, 'final', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
@@ -224,7 +224,7 @@
                                         {{assignment.CourseName}}
                                     </div>
                                     <div class="mainPageObjects" ng-repeat="event in assignment.events" style="margin-bottom: 2px;">
-                                        <a ng-click="eventpage(assignment.CourseNo, 'assignments', event)" href="#eventPage" style="color: blue">
+                                        <a ng-click="eventpage(assignment.CourseName, 'assignments', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
@@ -239,7 +239,7 @@
                                         {{q.CourseName}}
                                     </div>
                                     <div class="mainPageObjects" ng-repeat="event in q.events" style="margin-bottom: 2px;">
-                                        <a ng-click="eventpage(q.CourseNo, 'quiz', event)" href="#eventPage" style="color: blue">
+                                        <a ng-click="eventpage(q.CourseName, 'quiz', event)" href="#eventPage" style="color: blue">
                                             {{event}}
                                         </a>
                                     </div>
