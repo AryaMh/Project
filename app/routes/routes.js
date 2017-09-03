@@ -8,8 +8,7 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 var profModel = require('../models/professor.js');
 var formidable = require('formidable');
 var fs = require('fs');
-
-process.env.TMPDIR = '.';
+var mv = require('mv');
 
 module.exports = function(app, passport, path) {
 
@@ -79,8 +78,23 @@ module.exports = function(app, passport, path) {
                 var courseNo = fields.courseNo;
                 var professorEmail = req.user.local.email;
                 var eventType = fields.eventType;
-                var oldpath = 'D://Files//University//Project//views//Temp//';
-                var newpath = 'D://Files//University//Project//views//' + files.filetoupload.name;
+                var newpath = "D://Files//University//Project//views//";
+
+                if(eventType == 'midterm')
+                    newpath = 'D://Files//University//Project//views//Temp//midterm//';
+                if(eventType == 'final')
+                    newpath = 'D://Files//University//Project//views//Temp//final//';
+
+                if(eventType == 'quiz')
+                    newpath = 'D://Files//University//Project//views//Temp//quiz//';
+
+                if(eventType == 'assignments')
+                    newpath = 'D://Files//University//Project//views//Temp//assignments//';
+
+                newpath = newpath +files.filetoupload.name;
+
+                var oldpath = files.filetoupload.path;
+
                 profModel.getProfessorModel().findOne({ProfessorEmail: professorEmail}, function (error, data) {
                     if(data){
                         for(var i = 0 ; i < data.Courses.length; i++){
@@ -108,7 +122,7 @@ module.exports = function(app, passport, path) {
                             }
                         }
                         profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: professorEmail}, {$set:{Courses: data.Courses}},function (error, doc) {
-                            fs.writeFile(newpath, files.filetoupload, function (err) {
+                            mv(oldpath, newpath ,function (err) {
                                 if (err) throw err;
                                 console.log('Replaced!');
                             });
@@ -121,7 +135,8 @@ module.exports = function(app, passport, path) {
     });
 
     app.get('/download', isLoggedIn, function (req, res) {
-        var url = "D://Files//University//Project//views//"+req.query.name;
+        // console.log(req.query.eventType);
+        var url = 'D://Files//University//Project//views//Temp//'+req.query.eventType+'//'+req.query.name;
         var filename = req.query.name;
         res.setHeader('Content-disposition', 'attachment; filename=' + filename);
         var filestream = fs.createReadStream(url);
