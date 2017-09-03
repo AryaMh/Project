@@ -24,7 +24,7 @@
                 </aside>
             </div>
         </div>
-        <div class="column is-5" style="height: 200px;background-color: #f6f6f6;box-shadow: 0 0 5px rgba(0,0,0,0.7)">
+        <div class="column is-5" style="height: 250px;background-color: #f6f6f6;box-shadow: 0 0 5px rgba(0,0,0,0.7)">
 
             <div style="height: 95%;position: relative; color: white;">
 
@@ -42,21 +42,36 @@
                         </li>
                     </ul>
                 </div>
-                <div class="field is-centered" dir="ltr">
-                    <p class="control has-icons-left">
-                        <input name="email" class="input" type="text" placeholder="رایانامه" size="200px">
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-envelope"></i>
-                        </span>
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control" style="text-align: center">
-                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
-                            ثبت نام
-                        </button>
-                    </p>
-                </div>
+
+                <form action="/signup" method="post">
+                    <div class="field is-centered" dir="ltr">
+                        <p class="control has-icons-left">
+                            <input name="email" class="input" type="text" placeholder="رایانامه" size="200px">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field" dir="ltr" style="width: 90%; direction: ltr; position: absolute; display: inline-block; left: 0px;">
+                        <p class="control has-icons-left" >
+                            <input id="myPassword" class="input" type="password" placeholder="گذرواژه" name="password">
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="icon" style="display: inline-block; width: 50px; height: 30px; direction: ltr; margin-top: 7px; color: black;">
+                        <i class="fa fa-eye" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();"></i>
+                    </div>
+                    <div class="field" style="margin-top: 10px">
+                        <p class="control" style="text-align: center">
+                            <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                ثبت نام
+                            </button>
+                        </p>
+                    </div>
+                </form>
+
             </div>
         </div>
         <div class="column" style="">
@@ -69,4 +84,16 @@
     </div>
 </div>
 </body>
+<script>
+
+    function mouseoverPass(obj) {
+        var obj = document.getElementById('myPassword');
+        obj.type = "text";
+    }
+    function mouseoutPass(obj) {
+        var obj = document.getElementById('myPassword');
+        obj.type = "password";
+    }
+
+</script>
 </html>

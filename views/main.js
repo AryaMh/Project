@@ -40,8 +40,9 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
         var req = new Object();
         req.ProfessorEmail = ProfessorEmail;
         req.CourseNo = courseNo;
-        req.StudentResume = popUpProf + "\n" + popUpGrade + "\n" + popUpTATerms + "\n" + popUpAvg + "\n" + popUpTADesc +
-            "\n" + popUpFurtherDesc;
+        req.StudentResume = "استاد قبلی : " + popUpProf + " - نمره : " + popUpGrade +
+            " - تعداد ترم های دستیاری : " + popUpTATerms + " - معادل : " + popUpAvg +
+            " - سابقه دستیاری در دروس دیگر : " + popUpTADesc + " - توضیحات : " + popUpFurtherDesc;
 
         console.log(JSON.stringify(req));
         $http({
