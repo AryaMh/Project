@@ -262,13 +262,17 @@
                                 <button ng-click="sendMessage(CourseInfo.courseNo, msg)" class="button" style="color: white;margin-right: 5px;background: darkred;" type="submit" value="ارسال">ارسال</button>
                             </p>
                         </div>
-                        <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
-                            <div class="mainPageObjects" style="margin-bottom: 10px;">
-                                <div>فرستنده: {{msg.sender}}</div>
-                                <div>متن پیام: {{msg.msg}}</div>
-                                <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
+                        <div style="overflow-y: auto; max-height: 600px">
+                            <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
+                                <div class="mainPageObjects" style="margin-bottom: 10px;">
+                                    <div>فرستنده: {{msg.sender}}</div>
+                                    <div>متن پیام: {{msg.msg}}</div>
+                                    <div style="position:relative; font-size: small;" dir="ltr">{{msg.time}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+    <button ng-click="topFunction()" class="fa fa-chevron-up" id="goTop" title="Go to top"></button>
 </div>
