@@ -32,6 +32,12 @@ module.exports = function (app, passport) {
             res.json(results);
         });
     });
+
+    app.get('/sttarequest', function (req, res) {
+        tarequest.getTARequestModel().find({"Courses": {$elemMatch:{"tas" : {$elemMatch: {'StudentEmail': req.user.local.email}}}}}, function (error, doc) {
+            res.json(doc);
+        });
+    });
     function isLoggedIn(req, res, next) {
 
         // if user is authenticated in the session, carry on

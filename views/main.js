@@ -16,6 +16,7 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.myTasHidden = true;
     $scope.myCoursesHidden = true;
     $scope.myEventsHidden = true;
+    $scope.tareqs = [];
 
     $scope.isProfessor = true;
     $scope.allCourses = [];
@@ -31,8 +32,15 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
         .then(function(response) {
             $scope.courses = response.data;
         });
+
     $http.get("/tarequests/").then(function (res) {
-        $scope.reqs = res.data;
+        $scope.tareqs = res.data;
+        if(res.data.length == 0){
+            $http.get("/sttarequest")
+                .then(function(response) {
+                    $scope.tareqs = response.data;
+                });
+        }
     });
 
 

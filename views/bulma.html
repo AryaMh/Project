@@ -155,20 +155,22 @@
                         </div>
                         <div class="mainPageObjects">
                             <div>
-                                <ul ng-repeat="req in reqs">
+                                <ul ng-repeat="req in tareqs">
                                     <li>
                                         <ul ng-repeat="course in req.Courses">
                                             <li>
                                                 {{course.courseNo}}:
                                                 <ul ng-repeat="ta in course.tas">
-                                                    <div id="{{ta.StudentEmail}}" ng-model="taAcceptorRejectHidden" style="display: inline-block">
+                                                    <div id="{{ta.StudentEmail}}" style="display: inline-block">
                                                         {{ta.StudentEmail}}
-                                                        <span style="white-space:pre"> --- </span>
-                                                        <a ng-click="acceptta(ta.StudentEmail, course.courseNo)" style="color: green">قبول</a>
-                                                        |
-                                                        <a ng-click="rejectta(ta.StudentEmail, course.courseNo)" style="color: red">رد</a>
-                                                        <div>رزومه دانشجو:</div>
-                                                        <div>{{ta.StudentResume}}</div>
+                                                        <div ng-hide="taAcceptorRejectHidden">
+                                                            <span style="white-space:pre"> --- </span>
+                                                            <a ng-click="acceptta(ta.StudentEmail, course.courseNo)" style="color: green">قبول</a>
+                                                            |
+                                                            <a ng-click="rejectta(ta.StudentEmail, course.courseNo)" style="color: red">رد</a>
+                                                            <div>رزومه دانشجو:</div>
+                                                            <div>{{ta.StudentResume}}</div>
+                                                        </div>
                                                     </div>
                                                 </ul>
                                             </li>
