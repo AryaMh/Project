@@ -191,6 +191,41 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
             });
     };
 
+    $scope.removeEvent = function (courseNo, eventType, eventDate) {
+        var object = new Object();
+        object.eventType = eventType;
+        object.CourseNo = courseNo;
+        object.date = eventDate;
+
+        $http({
+            url: '/removeEvent/',
+            method: "POST",
+            data: JSON.stringify(object)
+        })
+            .then(function (response) {
+                if(object.eventType == 'midterm') {
+                    var index = $scope.CourseInfo.events.midterm.indexOf(object.date);
+                    if (index > -1)
+                        $scope.CourseInfo.events.midterm.splice(index, 1);
+                }
+                else if(object.eventType == 'final'){
+                    var index = $scope.CourseInfo.events.final.indexOf(object.date);
+                    if (index > -1)
+                        $scope.CourseInfo.events.final.splice(index, 1);
+                }
+                else if(object.eventType == 'quiz'){
+                    var index = $scope.CourseInfo.events.quiz.indexOf(object.date);
+                    if (index > -1)
+                        $scope.CourseInfo.events.quiz.splice(index, 1);
+                }
+                else if(object.eventType == 'assignments'){
+                    var index = $scope.CourseInfo.events.assignments.indexOf(object.date);
+                    if (index > -1)
+                        $scope.CourseInfo.events.assignments.splice(index, 1);
+                }
+            })
+    };
+
     $scope.submitNewEvent = function (courseNo, eventType, eventDate) {
         var object = new Object();
         object.eventType = eventType;

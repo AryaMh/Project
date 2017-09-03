@@ -186,6 +186,46 @@ module.exports = function (app, passport) {
             });
     });
 
+    app.post('/removeEvent', isLoggedIn, function (req, res) {
+        var eventType = req.body.eventType;
+        var ProfessorEmail = req.user.local.email;
+        var CourseNo = req.body.CourseNo;
+        var date = req.body.date;
+
+        professor.getProfessorModel().findOne({ProfessorEmail: ProfessorEmail}, function (error, data) {
+            if(data) {
+                for (var i = 0; i < data.Courses.length; i++) {
+                    if (data.Courses[i].courseNo == CourseNo) {
+                        if (eventType == "midterm") {
+                            var index = data.Courses[i].events.midterm.indexOf(date);
+                            if(index > -1)
+                                data.Courses[i].events.midterm.splice(index, 1);
+                        }
+                        else if (eventType == "final") {
+                            var index = data.Courses[i].events.final.indexOf(date);
+                            if(index > -1)
+                                data.Courses[i].events.final.splice(index, 1);
+                        }
+                        else if (eventType == "quiz") {
+                            var index = data.Courses[i].events.quiz.indexOf(date);
+                            if(index > -1)
+                                data.Courses[i].events.quiz.splice(index, 1);
+                        }
+                        else if (eventType == "assignments") {
+                            var index = data.Courses[i].events.assignments.indexOf(date);
+                            if(index > -1)
+                                data.Courses[i].events.assignments.splice(index, 1);
+                        }
+                        professor.getProfessorModel().findOneAndUpdate({ProfessorEmail: ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                            console.log(error);
+                        });
+                        return res.json("200 OK");
+                    }
+                }
+            }
+        })
+    });
+
     app.post('/setevent', isLoggedIn, function (req, res) {
         var eventType = req.body.eventType;
         var ProfessorEmail = req.user.local.email;//req.body.ProfessorEmail;

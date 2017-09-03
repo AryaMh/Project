@@ -55,6 +55,7 @@
                                         <div ng-repeat="event in CourseInfo.events.midterm">
                                             <div>
                                                 {{event}}
+                                                <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'midterm', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -109,6 +110,7 @@
                                         <div ng-repeat="event in CourseInfo.events.final">
                                             <div>
                                                 {{event}}
+                                                <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'final', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -163,6 +165,7 @@
                                         <div ng-repeat="event in CourseInfo.events.assignments">
                                             <div>
                                                 {{event}}
+                                                <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'assignments', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -217,6 +220,7 @@
                                         <div ng-repeat="event in CourseInfo.events.quiz">
                                             <div>
                                                 {{event}}
+                                                <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'quiz', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
                                             </div>
                                         </div>
                                         <div style="color: blue">
