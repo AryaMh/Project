@@ -42,6 +42,7 @@ module.exports.add = function (requestObject) {
                             if(!courseFound){
                                 var obj = new Object();
                                 obj.courseNo = requestObject.CourseNo;
+                                obj.courseName = requestObject.CourseName;
                                 obj.tas = [];
                                 var taobj = new Object();
                                 taobj.StudentEmail = requestObject.StudentEmail;
@@ -54,6 +55,7 @@ module.exports.add = function (requestObject) {
                         else {
                             var Courses = [];
                             var obj = new Object();
+                            obj.courseName = requestObject.CourseName;
                             obj.courseNo = requestObject.CourseNo;
                             obj.tas = [];
                             var taobj = new Object();
