@@ -82,7 +82,6 @@ module.exports = function(app, passport, path) {
 
                 if(eventType == 'midterm') {
                     newpath = process.cwd() + '\\views\\Temp\\midterm\\';
-                    console.log(newpath);
                 }
                 if(eventType == 'final')
                     newpath = process.cwd() + '\\views\\Temp\\final\\';
