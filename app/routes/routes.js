@@ -122,10 +122,12 @@ module.exports = function(app, passport, path) {
                             }
                         }
                         profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: professorEmail}, {$set:{Courses: data.Courses}},function (error, doc) {
-                            mv(oldpath, newpath ,function (err) {
-                                if (err) throw err;
-                                console.log('Replaced!');
-                            });
+                            if(files.size > 0) {
+                                mv(oldpath, newpath, function (err) {
+                                    if (err) throw err;
+                                    console.log('Replaced!');
+                                });
+                            }
                             return res.redirect('/profile');
                         });
                     }
