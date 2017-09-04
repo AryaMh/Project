@@ -20,6 +20,10 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
 
     $scope.isProfessor = true;
     $scope.allCourses = [];
+    $scope.editMidtermHidden = [];
+    $scope.editFinalHidden = [];
+    $scope.editAssignmentsHidden = [];
+    $scope.editQuizHidden = [];
 
     $http.get("/userType")
         .then(function(response) {
@@ -91,6 +95,23 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
             $scope.CourseInfo = res.data;
             if($scope.CourseInfo.messages)
                 $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
+
+            for (var i = 0; i < res.data.events.midterm.length; i++)
+            {
+                $scope.editMidtermHidden[i] = true;
+            }
+            for (var i = 0; i < res.data.events.final.length; i++)
+            {
+                $scope.editFinalHidden[i] = true;
+            }
+            for (var i = 0; i < res.data.events.assignments.length; i++)
+            {
+                $scope.editAssignmentsHidden[i] = true;
+            }
+            for (var i = 0; i < res.data.events.quiz.length; i++)
+            {
+                $scope.editQuizHidden[i] = true;
+            }
         });
     };
 
@@ -148,6 +169,9 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     $scope.newFinalHidden = true;
     $scope.newQuizHidden = true;
     $scope.newAssignmentHidden = true;
+    $scope.new_val=new Object();
+    $scope.new_val.first="";
+
     $scope.taToggle = function () {
         $scope.taHidden = !$scope.taHidden;
     };
@@ -187,6 +211,7 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
                 $scope.assignmentsHidden = !$scope.assignmentsHidden;
                 $scope.assignments = res.data;
             }
+
         });
     };
 
@@ -241,6 +266,50 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
                         $scope.CourseInfo.events.assignments.splice(index, 1);
                 }
             })
+    };
+
+    $scope.editEvent = function (courseNo, eventType, eventDate, newDate) {
+        var object = new Object();
+        object.eventType = eventType;
+        object.CourseNo = courseNo;
+        object.date = eventDate;
+        object.newDate = newDate;
+
+        $http({
+            url: '/editEvent/',
+            method: "POST",
+            data: JSON.stringify(object)
+        })
+            .then(function (response) {
+                if(object.eventType == 'midterm') {
+                    var index = $scope.CourseInfo.events.midterm.indexOf(object.date);
+                    if (index > -1) {
+                        $scope.CourseInfo.events.midterm[index] = newDate;
+                        $scope.editMidtermHidden[index] = true;
+                    }
+                }
+                else if(object.eventType == 'final'){
+                    var index = $scope.CourseInfo.events.final.indexOf(object.date);
+                    if (index > -1){
+                        $scope.CourseInfo.events.final[index] = newDate;
+                        $scope.editFinalHidden[index] = true;
+                    }
+                }
+                else if(object.eventType == 'quiz'){
+                    var index = $scope.CourseInfo.events.quiz.indexOf(object.date);
+                    if (index > -1){
+                        $scope.CourseInfo.events.quiz[index] = newDate;
+                        $scope.editQuizHidden[index] = true;
+                    }
+                }
+                else if(object.eventType == 'assignments'){
+                    var index = $scope.CourseInfo.events.assignments.indexOf(object.date);
+                    if (index > -1){
+                        $scope.CourseInfo.events.assignments[index] = newDate;
+                        $scope.editAssignmentsHidden[index] = true;
+                    }
+                }
+            });
     };
 
     $scope.submitNewEvent = function (courseNo, eventType, eventDate) {

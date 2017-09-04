@@ -56,6 +56,15 @@
                                             <div>
                                                 {{event}}
                                                 <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'midterm', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+                                                <i ng-hide="isProfessor" ng-click="editMidtermHidden[$index] = !editMidtermHidden[$index]" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="field" dir="rtl" style="margin-bottom: 10px;">
+                                                <p class="control">
+                                                    <input dir="rtl" ng-model="new_val.first" ng-hide=editMidtermHidden[{{$index}}] class="input" type="text" placeholder="ثبت تاریخ ساعت و مکان" style="width: 60%; display: inline-block; float: right;">
+                                                </p>
+                                                <button ng-click="editEvent(CourseInfo.courseNo, 'midterm', event, new_val.first)" ng-hide=editMidtermHidden[{{$index}}] type="submit" class="button is-success " style="background-color: darkred;width: 15%">
+                                                  ذخیره تغییرات
+                                                </button>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -111,6 +120,15 @@
                                             <div>
                                                 {{event}}
                                                 <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'final', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+                                                <i ng-hide="isProfessor" ng-click="editFinalHidden[$index] = !editFinalHidden[$index]" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="field" dir="rtl" style="margin-bottom: 10px;">
+                                                <p class="control">
+                                                    <input dir="rtl" ng-model="new_val.first" ng-hide=editFinalHidden[{{$index}}] class="input" type="text" placeholder="ثبت تاریخ ساعت و مکان" style="width: 60%; display: inline-block; float: right;">
+                                                </p>
+                                                <button ng-click="editEvent(CourseInfo.courseNo, 'final', event, new_val.first)" ng-hide=editFinalHidden[{{$index}}] type="submit" class="button is-success " style="background-color: darkred;width: 15%">
+                                                    ذخیره تغییرات
+                                                </button>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -166,6 +184,15 @@
                                             <div>
                                                 {{event}}
                                                 <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'assignments', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+                                                <i ng-hide="isProfessor" ng-click="editAssignmentsHidden[$index] = !editAssignmentsHidden[$index]" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="field" dir="rtl" style="margin-bottom: 10px;">
+                                                <p class="control">
+                                                    <input dir="rtl" ng-model="new_val.first" ng-hide=editAssignmentsHidden[{{$index}}] class="input" type="text" placeholder="ثبت تاریخ ساعت و مکان" style="width: 60%; display: inline-block; float: right;">
+                                                </p>
+                                                <button ng-click="editEvent(CourseInfo.courseNo, 'assignments', event, new_val.first)" ng-hide=editAssignmentsHidden[{{$index}}] type="submit" class="button is-success " style="background-color: darkred;width: 15%">
+                                                    ذخیره تغییرات
+                                                </button>
                                             </div>
                                         </div>
                                         <div style="color: blue">
@@ -221,6 +248,15 @@
                                             <div>
                                                 {{event}}
                                                 <i ng-hide="isProfessor" ng-click="removeEvent(CourseInfo.courseNo, 'quiz', event)" class="fa fa-times" aria-hidden="true" style="color: red;"></i>
+                                                <i ng-hide="isProfessor" ng-click="editQuizHidden[$index] = !editQuizHidden[$index]" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="field" dir="rtl" style="margin-bottom: 10px;">
+                                                <p class="control">
+                                                    <input dir="rtl" ng-model="new_val.first" ng-hide=editQuizHidden[{{$index}}] class="input" type="text" placeholder="ثبت تاریخ ساعت و مکان" style="width: 60%; display: inline-block; float: right;">
+                                                </p>
+                                                <button ng-click="editEvent(CourseInfo.courseNo, 'quiz', event, new_val.first)" ng-hide=editQuizHidden[{{$index}}] type="submit" class="button is-success " style="background-color: darkred;width: 15%">
+                                                    ذخیره تغییرات
+                                                </button>
                                             </div>
                                         </div>
                                         <div style="color: blue">
