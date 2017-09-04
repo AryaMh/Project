@@ -80,16 +80,18 @@ module.exports = function(app, passport, path) {
                 var eventType = fields.eventType;
                 var newpath = "D://Files//University//Project//views//";
 
-                if(eventType == 'midterm')
-                    newpath = 'D://Files//University//Project//views//Temp//midterm//';
+                if(eventType == 'midterm') {
+                    newpath = process.cwd() + '\\views\\Temp\\midterm\\';
+                    console.log(newpath);
+                }
                 if(eventType == 'final')
-                    newpath = 'D://Files//University//Project//views//Temp//final//';
+                    newpath = process.cwd() + '\\views\\Temp\\final\\';
 
                 if(eventType == 'quiz')
-                    newpath = 'D://Files//University//Project//views//Temp//quiz//';
+                    newpath = process.cwd() + '\\views\\Temp\\quiz\\';
 
                 if(eventType == 'assignments')
-                    newpath = 'D://Files//University//Project//views//Temp//assignments//';
+                    newpath = process.cwd() + '\\views\\Temp\\assignments\\';
 
                 newpath = newpath +files.filetoupload.name;
 
@@ -122,9 +124,11 @@ module.exports = function(app, passport, path) {
                             }
                         }
                         profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: professorEmail}, {$set:{Courses: data.Courses}},function (error, doc) {
-                            if(files.size > 0) {
+                            if(files.size > 0 || true) {
                                 mv(oldpath, newpath, function (err) {
-                                    if (err) throw err;
+                                    if (err) {
+                                        return res.redirect('/profile');
+                                    }
                                     console.log('Replaced!');
                                 });
                             }
@@ -138,7 +142,7 @@ module.exports = function(app, passport, path) {
 
     app.get('/download', isLoggedIn, function (req, res) {
         // console.log(req.query.eventType);
-        var url = 'D://Files//University//Project//views//Temp//'+req.query.eventType+'//'+req.query.name;
+        var url = process.cwd()+'\\views\\Temp\\'+req.query.eventType+'\\'+req.query.name;
         var filename = req.query.name;
         res.setHeader('Content-disposition', 'attachment; filename=' + filename);
         var filestream = fs.createReadStream(url);
