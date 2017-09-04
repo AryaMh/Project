@@ -160,8 +160,8 @@ module.exports = function(app, passport, path) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.sendfile('./views/login.html');
-        //res.render('login.ejs', { message: req.flash('loginMessage') });
+        // res.sendfile('./views/login.html');
+        res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
     // process the login form
@@ -178,8 +178,8 @@ module.exports = function(app, passport, path) {
     app.get('/signup', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.sendfile('./views/signup.html');
-        //res.render('signup.ejs', { message: req.flash('signupMessage') });
+        // res.sendfile('./views/signup.html');
+        res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
     // process the signup form

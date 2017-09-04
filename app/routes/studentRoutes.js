@@ -13,6 +13,7 @@ module.exports = function (app, passport) {
         requestObject.ProfessorEmail = profEmail;
         requestObject.StudentEmail = studentUser;
         requestObject.CourseNo = courseNo;
+        requestObject.CourseName = req.body.CourseName;
         requestObject.StudentResume = req.body.StudentResume;
         tarequest.add(requestObject);
         res.json({'response': '200'});

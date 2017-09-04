@@ -52,7 +52,7 @@ module.exports = function(passport) {
 
                     // check to see if theres already a user with that email
                     if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                        return done(null, false, req.flash('signupMessage', 'این رایانامه قبلاً استفاده شده است.'));
                     } else {
 
                         // if there is no user with that email
@@ -60,8 +60,13 @@ module.exports = function(passport) {
                         var newUser            = new User();
 
                         // set the user's local credentials
-                        newUser.local.email    = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        if(email.includes('@sharif.edu') || email.includes('@ce.sharif.edu')) {
+                            newUser.local.email = email;
+                            newUser.local.password = newUser.generateHash(password);
+                        }
+                        else {
+                            return done(null, false, req.flash('signupMessage', 'فرمت ایمیل برای دانشگاه یا دانشکده نمی باشد.'));
+                        }
 
                         // save the user
                         newUser.save(function(err) {
@@ -100,11 +105,11 @@ module.exports = function(passport) {
 
                 // if no user is found, return the message
                 if (!user)
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false, req.flash('loginMessage', 'کاربری با این رایانامه یافت نشد.')); // req.flash is the way to set flashdata using connect-flash
 
                 // if the user is found but the password is wrong
                 if (!user.validPassword(password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    return done(null, false, req.flash('loginMessage', 'گذرواژه نادرست است.')); // create the loginMessage and save it to session as flashdata
 
                 // all is well, return successful user
                 return done(null, user);

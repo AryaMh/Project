@@ -1,46 +1,86 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
+    <meta charset="UTF-8">
+    <title>استادافزار | ورود</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
 </head>
-<body>
-<div class="container">
+<body dir="rtl" style="min-height: 100vh;margin: 0; padding: 0;background-color: #cacaca;">
+<div style="background-color: #9c0000; padding: 15px 10px; color: white;box-shadow: 0 1px 5px rgba(0,0,0,0.6); position: fixed;top: 0;left: 0;width: 100%;z-index: 100">
+    <div style="font-size: 24px; font-weight: bold;">
 
-    <div class="col-sm-6 col-sm-offset-3">
-
-        <h1><span class="fa fa-sign-in"></span> Login</h1>
-
-        <!-- show any messages that come back with authentication -->
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-        <% } %>
-
-        <!-- LOGIN FORM -->
-        <form action="/login" method="post">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
-            </div>
-
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
-        </form>
-
-        <hr>
-
-        <p>Need an account? <a href="/signup">Signup</a></p>
-        <p>Or go <a href="/">home</a>.</p>
-
+        استادافزار
     </div>
+</div>
+<div class="container is-fluid">
+    <div class="columns" style="min-height: 100vh;padding: 100px 0 0 0;">
+        <div class="column">
+            <div style=" height: 95%;position: relative; color: white;">
+                <aside class="menu">
 
+                </aside>
+            </div>
+        </div>
+        <div class="column is-centered" style="height: 250px;background-color: #f6f6f6;box-shadow: 0 0 5px rgba(0,0,0,0.7)">
+
+            <div style="height: 95%;position: relative; color: white;">
+
+                <% if (message.length > 0) { %>
+                <div dir="rtl" style="color: red" class="alert alert-danger"><%= message %></div>
+                <% } %>
+
+                <div class="tabs is-boxed">
+                    <ul>
+                        <li class="is-active">
+                            <a href="/login" dir="ltr" style="color: white; background-color: darkred">
+                                <span>ورود</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/signup" dir="ltr">
+                                <span>ثبت نام</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <form action="/login" method="post">
+                    <div class="field" dir="ltr">
+                        <p class="control has-icons-left">
+                            <input name="email" class="input" type="text" placeholder="رایانامه" size="200px">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field" dir="ltr">
+                        <p class="control has-icons-left">
+                            <input class="input" name="password" type="password" placeholder="گذرواژه">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control" style="text-align: center">
+                            <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                ورود
+                            </button>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="column" style="">
+            <div style="height: 95%;position: relative; color: white;">
+                <aside class="menu">
+
+                </aside>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

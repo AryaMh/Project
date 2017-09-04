@@ -27,49 +27,52 @@
     <div ng-click="showPopUp = true" ng-hide="showPopUp" style="position: fixed; z-index: 500; background-color: rgba(122,122,122,0.80); min-height: 100%; min-width: 100%;">
     </div>
     <div id="popUpId" ng-hide="showPopUp" dir="rtl" style="position: fixed; z-index: 501; width: 22%; overflow-y: auto; height: 80%; background-color: rgba(220,220,220,0.90); left: 39%; top: 10%; border-radius: 5px">
-        <div class="menu-label" style="position:relative; display: inline-block; margin: 10px ;font-size: medium; text-align: center; padding: 10px; background-color: darkred; color: #FFF;">
-            <p>{{reqCourse.courseName}}</p>
-            <p>{{reqCourse.ProfessorName}}</p>
-        </div>
-        <div style="margin-right: 10px;">
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">نام استادی که با آن این درس را گذراندید</label>
-                    <input ng-model="popUpProf" class="input" type="text" style="margin: 10px;width: 50%;display: block" placeholder="نام استاد مربوطه">
-                </div>
+        <div style="color: green" ng-hide="!PopUpContent">با موفقیت ارسال شد</div>
+        <div ng-hide="PopUpContent">
+            <div class="menu-label" style="position:relative; display: inline-block; margin: 10px ;font-size: medium; text-align: center; padding: 10px; background-color: darkred; color: #FFF;">
+                <p>{{reqCourse.courseName}}</p>
+                <p>{{reqCourse.ProfessorName}}</p>
             </div>
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">نمره کسب شده در این درس</label>
-                    <input ng-model="popUpGrade" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="10.50">
+            <div style="margin-right: 10px;">
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">نام استادی که با آن این درس را گذراندید</label>
+                        <input ng-model="popUpProf" class="input" type="text" style="margin: 10px;width: 50%;display: block" placeholder="نام استاد مربوطه">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">سابقه دستیاری در این درس</label>
-                    <input ng-model="popUpTATerms" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="تعداد ترمها">
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">نمره کسب شده در این درس</label>
+                        <input ng-model="popUpGrade" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="10.50">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">معدل کل</label>
-                    <input ng-model="popUpAvg" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="10.50">
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">سابقه دستیاری در این درس</label>
+                        <input ng-model="popUpTATerms" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="تعداد ترمها">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">سوابق دستیاری در دروس دیگر</label>
-                    <textarea ng-model="popUpTADesc" rows="5" cols="60" maxlength="500" style="margin: 10px;display: block;"></textarea>
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">معدل کل</label>
+                        <input ng-model="popUpAvg" class="input" type="text" style="margin: 10px;width: 30%;display: block" placeholder="10.50">
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div style="margin: 10px;">
-                    <label class="label">توضیحات بیشتر</label>
-                    <textarea ng-model="popUpFurtherDesc" rows="5" cols="60" maxlength="500" style="margin: 10px;display: block;"></textarea>
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">سوابق دستیاری در دروس دیگر</label>
+                        <textarea ng-model="popUpTADesc" rows="5" cols="60" maxlength="500" style="margin: 10px;display: block;"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <button ng-click="sendTaRequest(popUpProf, popUpGrade, popUpTATerms, popUpAvg, popUpTADesc, popUpFurtherDesc, reqCourse.ProfessorEmail, reqCourse.courseNo)" style="background-color: darkred;position: relative; margin-right: 42.5%; margin-top: 10px;" class="button is-success">ارسال</button>
+                <div>
+                    <div style="margin: 10px;">
+                        <label class="label">توضیحات بیشتر</label>
+                        <textarea ng-model="popUpFurtherDesc" rows="5" cols="60" maxlength="500" style="margin: 10px;display: block;"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button ng-click="sendTaRequest(popUpProf, popUpGrade, popUpTATerms, popUpAvg, popUpTADesc, popUpFurtherDesc, reqCourse.ProfessorEmail, reqCourse.courseNo, reqCourse.courseName)" style="background-color: darkred;position: relative; margin-right: 42.5%; margin-top: 10px;" class="button is-success">ارسال</button>
+                </div>
             </div>
         </div>
     </div>

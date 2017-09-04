@@ -2,7 +2,7 @@
  * Created by ARYA on 8/30/2017.
  */
 var app = angular.module('main', ['ngRoute']);
-app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
+app.controller('mainCtrl', function($scope, $http, $anchorScroll, $window) {
     $scope.courses = [];
     $scope.tas = [];
     $scope.mainPage = false;
@@ -65,10 +65,11 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
     };
 
 
-    $scope.sendTaRequest = function(popUpProf, popUpGrade, popUpTATerms, popUpAvg, popUpTADesc, popUpFurtherDesc, ProfessorEmail, courseNo){
+    $scope.sendTaRequest = function(popUpProf, popUpGrade, popUpTATerms, popUpAvg, popUpTADesc, popUpFurtherDesc, ProfessorEmail, courseNo, courseName){
         var req = new Object();
         req.ProfessorEmail = ProfessorEmail;
         req.CourseNo = courseNo;
+        req.CourseName = courseName;
         req.StudentResume = "استاد قبلی : " + popUpProf + " - نمره : " + popUpGrade +
             " - تعداد ترم های دستیاری : " + popUpTATerms + " - معادل : " + popUpAvg +
             " - سابقه دستیاری در دروس دیگر : " + popUpTADesc + " - توضیحات : " + popUpFurtherDesc;
@@ -81,8 +82,10 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll) {
         })
             .then(function (response) {
                 if(response.data['response'] == "200"){
-                    var elem = document.getElementById('popUpId');
-                    elem.parentNode.removeChild(elem);
+                    // var elem = document.getElementById('popUpId');
+                    // elem.parentNode.removeChild(elem);
+                    $scope.PopUpContent = true;
+                    $window.location.href = '/profile';
                 }
             });
 
