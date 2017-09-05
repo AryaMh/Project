@@ -71,7 +71,7 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll, $window) {
         req.CourseNo = courseNo;
         req.CourseName = courseName;
         req.StudentResume = "استاد قبلی : " + popUpProf + " - نمره : " + popUpGrade +
-            " - تعداد ترم های دستیاری : " + popUpTATerms + " - معادل : " + popUpAvg +
+            " - تعداد ترم های دستیاری : " + popUpTATerms + " - معدل : " + popUpAvg +
             " - سابقه دستیاری در دروس دیگر : " + popUpTADesc + " - توضیحات : " + popUpFurtherDesc;
 
         console.log(JSON.stringify(req));
@@ -81,10 +81,11 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll, $window) {
             data: JSON.stringify(req)
         })
             .then(function (response) {
-                if(response.data['response'] == "200"){
+                if(response.data){
                     // var elem = document.getElementById('popUpId');
                     // elem.parentNode.removeChild(elem);
                     $scope.PopUpContent = true;
+                    $scope.PopUpContentMessage = response.data;
                     $window.location.href = '/profile';
                 }
             });
@@ -394,15 +395,16 @@ app.controller('mainCtrl', function($scope, $http, $anchorScroll, $window) {
             data: JSON.stringify(object)
         })
             .then(function (response) {
+                console.log(response.data);
                 object.sender = response.data.sender;
                 if($scope.CourseInfo.messages) {
-                    $scope.CourseInfo.messages.push(object);
-                    $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
+                    $scope.CourseInfo.messages.push(response.data);
+                    // $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
                 }
                 else {
                     $scope.CourseInfo.messages = [];
                     $scope.CourseInfo.messages.push(object);
-                    $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
+                    // $scope.CourseInfo.messages = $scope.CourseInfo.messages.reverse();
                 }
                 document.getElementById('sendmsg').value = "";
                  //document.getElementById('messageBoard').append('<div class="mainPageObjects" style="margin-bottom: 10px;"><div>فرستنده: {{msg.sender}}</div> <div>متن پیام: {{msg.msg}}</div> <div style="position:relative; font-size: small;">تاریخ ارسال:{{msg.time}}</div></div>');

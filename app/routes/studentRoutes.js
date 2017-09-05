@@ -15,8 +15,7 @@ module.exports = function (app, passport) {
         requestObject.CourseNo = courseNo;
         requestObject.CourseName = req.body.CourseName;
         requestObject.StudentResume = req.body.StudentResume;
-        tarequest.add(requestObject);
-        res.json({'response': '200'});
+        tarequest.add(requestObject, res);
     });
     app.get('/studentcourses', isLoggedIn, function (req, res) {
         var taEmail = req.user.local.email;

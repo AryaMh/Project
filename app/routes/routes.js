@@ -21,6 +21,7 @@ module.exports = function(app, passport, path) {
             if(data) {
                 for (var i = 0; i < data.Courses.length; i++) {
                     if (data.Courses[i].courseNo == courseNo) {
+                        console.log("found");
                         if (data.Courses[i].messages != null) {
                             var msgObject = new Object();
                             msgObject.sender = req.user.local.email;
@@ -36,6 +37,7 @@ module.exports = function(app, passport, path) {
                             msgObject.time = req.body.time;
                             data.Courses[i].messages.push(msgObject);
                         }
+                        console.log(data.Courses[i].messages);
                         profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: req.user.local.email}, {$set: {Courses: data.Courses}}, function (error, doc) {
                             return res.json(msgObject);
                         });
@@ -43,27 +45,34 @@ module.exports = function(app, passport, path) {
                 }
             }
             else {
-                    profModel.getProfessorModel().findOne({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, data) {
-                        for (var i = 0; i < data.Courses.length; i++) {
-                            if (data.Courses[i].courseNo == courseNo) {
-                                if (data.Courses[i].messages != null) {
+                    profModel.getProfessorModel().find({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, function (error, data) {
+                        for(var j = 0 ; j < data.length; j++) {
+                            for (var i = 0; i < data[j].Courses.length; i++){
+                                if (data[j].Courses[i].courseNo == courseNo)
+                                {
+                                    if (data[j].Courses[i].messages != null) {
+                                        var msgObject = new Object();
+                                        msgObject.sender = req.user.local.email;
+                                        msgObject.msg = msg;
+                                        msgObject.time = req.body.time;
+                                        data[j].Courses[i].messages.push(msgObject);
+                                    }
+                                    else {
+                                        data[j].Courses[i].messages = [];
+                                        var msgObject = new Object();
+                                        msgObject.sender = req.user.local.email;
+                                        msgObject.msg = msg;
+                                        msgObject.time = req.body.time;
+                                        data[j].Courses[i].messages.push(msgObject);
+                                    }
+                                    profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: data[j].ProfessorEmail}, {$set:{Courses: data[j].Courses}}, function (error, doc) {
+                                    })
                                     var msgObject = new Object();
                                     msgObject.sender = req.user.local.email;
                                     msgObject.msg = msg;
                                     msgObject.time = req.body.time;
-                                    data.Courses[i].messages.push(msgObject);
-                                }
-                                else {
-                                    data.Courses[i].messages = [];
-                                    var msgObject = new Object();
-                                    msgObject.sender = req.user.local.email;
-                                    msgObject.msg = msg;
-                                    msgObject.time = req.body.time;
-                                    data.Courses[i].messages.push(msgObject);
-                                }
-                                profModel.getProfessorModel().findOneAndUpdate({"Courses": {$elemMatch:{"tas" : {$elemMatch: {$eq: req.user.local.email}}}}}, {$set: {Courses: data.Courses}}, function (error, doc) {
                                     return res.json(msgObject);
-                                });
+                                }
                             }
                         }
                 });
@@ -133,6 +142,50 @@ module.exports = function(app, passport, path) {
                             }
                             return res.redirect('/profile');
                         });
+                    }
+                    else {
+                        console.log(eventType);
+                        profModel.getProfessorModel().findOne({"Courses": {$elemMatch:{"courseNo" : courseNo}}}, function (error, data) {
+                            for(var i = 0 ; i < data.Courses.length; i++) {
+                                if (data.Courses[i].courseNo == courseNo) {
+                                    if (eventType == 'midterm') {
+                                        if (data.Courses[i].events.midtermfiles == null)
+                                            data.Courses[i].events.midtermfiles = [];
+                                        data.Courses[i].events.midtermfiles.push(files.filetoupload.name);
+                                        console.log("here");
+                                    }
+                                    else if (eventType == 'final') {
+                                        if (data.Courses[i].events.finalfiles == null)
+                                            data.Courses[i].events.finalfiles = [];
+                                        data.Courses[i].events.finalfiles.push(files.filetoupload.name);
+                                    }
+                                    else if (eventType == 'quiz') {
+                                        if (data.Courses[i].events.quizfiles == null)
+                                            data.Courses[i].events.quizfiles = [];
+                                        data.Courses[i].events.quizfiles.push(files.filetoupload.name);
+                                    }
+                                    else if (eventType == 'assignments') {
+                                        if (data.Courses[i].events.assignmentsfiles == null)
+                                            data.Courses[i].events.assignmentsfiles = [];
+                                        data.Courses[i].events.assignmentsfiles.push(files.filetoupload.name);
+                                    }
+                                    break;
+                                }
+                            }
+                            {
+                                profModel.getProfessorModel().findOneAndUpdate({ProfessorEmail: data.ProfessorEmail}, {$set: {Courses: data.Courses}}, function (error, doc) {
+                                    if (files.size > 0 || true) {
+                                        mv(oldpath, newpath, function (err) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                            return res.end();
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                        return res.redirect('/profile');
                     }
                 });
             });

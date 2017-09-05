@@ -52,6 +52,34 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div ng-hide="!isProfessor">
+                                            <form action="/fileUpload" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="courseNo" value="{{CourseInfo.courseNo}}">
+                                                <input type="text" name="eventType" value="midterm">
+                                                <div class="field">
+                                                    <div class="file is-info">
+                                                        <label class="file-label">
+                                                            <input class="file-input" type="file" name="filetoupload">
+                                                            <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                      <i class="fa fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        افزودن فایل
+                                                                    </span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control" style="text-align: center">
+                                                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                            ثبت
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.midterm">
                                             <div>
                                                 {{event}}
@@ -110,6 +138,34 @@
                                                 <div class="field">
                                                     <p class="control" style="text-align: center">
                                                         <button ng-click="submitNewEvent(CourseInfo.courseNo, 'final', eventTime2)" type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                            ثبت
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div ng-hide="!isProfessor">
+                                            <form action="/fileUpload" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="courseNo" value="{{CourseInfo.courseNo}}">
+                                                <input type="text" name="eventType" value="final">
+                                                <div class="field">
+                                                    <div class="file is-info">
+                                                        <label class="file-label">
+                                                            <input class="file-input" type="file" name="filetoupload">
+                                                            <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                      <i class="fa fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        افزودن فایل
+                                                                    </span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control" style="text-align: center">
+                                                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
                                                             ثبت
                                                         </button>
                                                     </p>
@@ -180,6 +236,34 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div ng-hide="!isProfessor">
+                                            <form action="/fileUpload" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="courseNo" value="{{CourseInfo.courseNo}}">
+                                                <input type="text" name="eventType" value="assignments">
+                                                <div class="field">
+                                                    <div class="file is-info">
+                                                        <label class="file-label">
+                                                            <input class="file-input" type="file" name="filetoupload">
+                                                            <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                      <i class="fa fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        افزودن فایل
+                                                                    </span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control" style="text-align: center">
+                                                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                            ثبت
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.assignments">
                                             <div>
                                                 {{event}}
@@ -244,6 +328,34 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div ng-hide="!isProfessor">
+                                            <form action="/fileUpload" method="post" enctype="multipart/form-data">
+                                                <input type="text" name="courseNo" value="{{CourseInfo.courseNo}}">
+                                                <input type="text" name="eventType" value="quiz">
+                                                <div class="field">
+                                                    <div class="file is-info">
+                                                        <label class="file-label">
+                                                            <input class="file-input" type="file" name="filetoupload">
+                                                            <span class="file-cta">
+                                                                    <span class="file-icon">
+                                                                      <i class="fa fa-upload"></i>
+                                                                    </span>
+                                                                    <span class="file-label">
+                                                                        افزودن فایل
+                                                                    </span>
+                                                                </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <p class="control" style="text-align: center">
+                                                        <button type="submit" class="button is-success " style="background-color: darkred;width: 30%">
+                                                            ثبت
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        </div>
                                         <div ng-repeat="event in CourseInfo.events.quiz">
                                             <div>
                                                 {{event}}
@@ -299,7 +411,7 @@
                             </p>
                         </div>
                         <div style="overflow-y: auto; max-height: 600px">
-                            <div ng-repeat="msg in CourseInfo.messages" id="messageBoard">
+                            <div ng-repeat="msg in CourseInfo.messages | orderBy : '-time'" id="messageBoard">
                                 <div class="mainPageObjects" style="margin-bottom: 10px;">
                                     <div>فرستنده: {{msg.sender}}</div>
                                     <div>متن پیام: {{msg.msg}}</div>
